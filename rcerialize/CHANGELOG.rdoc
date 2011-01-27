@@ -1,7 +1,4 @@
-=== 0.1.0 2010-08-30
+=== 0.1.0 2011-1-27
 
 Initial release
 
-=== 0.1.0 2010-08-30
-
-Added nil check on id
