@@ -1,0 +1,4 @@
+#ifndef RCERIALIZE_TYPE_SPEC
+	#define RCERIALIZE_TYPE_SPEC
+
+#endif

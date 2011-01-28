@@ -4,7 +4,7 @@
 	#include <rbdb/CerializedData.h>
 	#include <rbdb/CerializedData_internal.h>
 	#include <ruby.h>	
-	#include "RcerializedData_type.h"
+	#include "rcerialize/rcerialize_types.h"
 
 	VALUE Rcerialize_unpackRubyInstance(	CerializedData*			c_cerialized_data,
 																				VALUE								rb_load_as_class );

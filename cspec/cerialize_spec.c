@@ -3,97 +3,114 @@
 #include <cspec/cspec_output_verbose.h>
 #include <cspec/cspec_output_unit.h>
 
-#include "../include/cerialize.h"
-
 #include <string.h>
 
-/*********************
-*  createTypeFooter  *
-*********************/
+#include "cerialize.h"
 
-DESCRIBE( CerializedData_internal_createTypeFooter, "CerializedData_internal_createTypeFooter( CerializedData* cerialized_data )" )
-  IT( "can create and append a type footer to existing data, or before existing data is set" )
+/********
+*  new  *
+********/
+
+DESCRIBE( CerializedData_new, "\n * CerializedData_new( void* data, uint32_t size )" )
+  IT( "can be created with raw data of a given size" )
+
+	char*	data	=	strdup( "storage string" );
+	CerializedData*	cerialized_data	=	CerializedData_new(	(void**) & data,
+																												( strlen( data ) + 1 ) * sizeof( char ) );
+
+	SHOULD_EQUAL( cerialized_data->data, data );
+	SHOULD_EQUAL( cerialized_data->size, ( strlen( data ) + 1 ) * sizeof( char ) );
 	
-	//	before existing data is set
-	CerializedData*	cerialized_data	=	calloc( 1, sizeof( CerializedData ) );
-	
-		//	set footer
-		CerializedData_internal_createTypeFooter( cerialized_data );		
-		
-			//	ensure footer exists
-			SHOULD_NOT_BE_NULL( cerialized_data->footer );
-				
-		//	set data
-		char*	new_data	=	"new_data";
-		CerializedData_setData(	cerialized_data,
-														(void*) new_data,
-														( strlen( new_data ) + 1 ) * sizeof( char ) );
-		
-			//	ensure data exists
-			SHOULD_EQUAL( CerializedData_data( cerialized_data ), new_data );
-			
-			//	ensure footer exists
-			SHOULD_NOT_BE_NULL( cerialized_data->footer );
-	
-	//	free
 	CerializedData_free( & cerialized_data );
 	
-	//	to existing data
-	char*	existing_data	=	"existing_data";
-	cerialized_data	=	CerializedData_new(	(void*) existing_data,
-																				( strlen( existing_data ) + 1 ) * sizeof( char ) );
+  END_IT
+END_DESCRIBE
 
-		//	ensure data exists
-		SHOULD_EQUAL( CerializedData_data( cerialized_data ), existing_data );		
-		
-		//	ensure footer exists
-		SHOULD_NOT_BE_NULL( cerialized_data->footer );
+/************
+*  setData  *
+*  data     *
+*  size     *
+************/
+
+DESCRIBE( CerializedData_setData_data_size, "\n * CerializedData_setData( CerializedData* cerialized_data, void** data, uint32_t size )\n * CerializedData_data( CerializedData* cerialized_data )\n * CerializedData_size( CerializedData* cerialized_data )" )
+  IT( "can set and return raw data of a given size and the size" )
+
+	CerializedData*	cerialized_data	=	calloc( 1, sizeof( CerializedData ) );
+	
+	char*	data	=	strdup( "data" );
+
+	CerializedData_setData(	cerialized_data,
+													(void**) & data,
+													( strlen( data ) + 1 ) * sizeof( char ) );
+
+	SHOULD_EQUAL( cerialized_data->data, data );
+
+	CerializedData_free( & cerialized_data );
+
+  END_IT
+END_DESCRIBE
+
+/************
+*  setType  *
+*  type     *
+************/
+
+DESCRIBE( CerializedData_setType_type, "\n * CerializedData_setType( CerializedData* cerialized_data, CerializeType type )\n * CerializedData_type( CerializedData* cerialized_data )" )
+  IT( "sets and reports a storage type" )
+
+	char*	data	=	strdup( "storage string" );
+	CerializedData*	cerialized_data	=	CerializedData_new(	(void**) & data,
+																												( strlen( data ) + 1 ) * sizeof( char ) );
+	CerializedData_setType(	cerialized_data,
+													CerializeType_Symbol );
+	SHOULD_EQUAL( CerializedData_type( cerialized_data ), CerializeType_Symbol );
+
+	CerializedData_free( & cerialized_data );
 	
   END_IT
 END_DESCRIBE
 
-/*********************
-*  createDataFooter  *
-*********************/
+/**********************
+*  creationStamp      *
+*  modificationStamp  *
+**********************/
 
-DESCRIBE( CerializedData_internal_createDataFooter, "CerializedData_internal_createDataFooter( CerializedData* cerialized_data )" )
-  IT( "can create and append a data footer to existing data, or before existing data is set" )
+DESCRIBE( CerializedData_creationStamp_modificationStamp, "\n * CerializedData_creationStamp( CerializedData* cerialized_data )\n * CerializedData_modificationStamp( CerializedData* cerialized_data )" )
+  IT( "can maintain creation and modification stamps" )
 
-  END_IT
-END_DESCRIBE
+	char*	data	=	strdup( "storage string" );
+	CerializedData*	cerialized_data	=	CerializedData_new(	(void**) & data,
+																												( strlen( data ) + 1 ) * sizeof( char ) );
 
-/******************
-*  hasTypeFooter  *
-******************/
+	CerializedData_internal_createDataFooter( cerialized_data );
+	
+	SHOULD_NOT_BE_NULL( cerialized_data->footer->creation_stamp.tv_sec );
+	SHOULD_NOT_BE_NULL( cerialized_data->footer->creation_stamp.tv_usec );
 
-DESCRIBE( CerializedData_internal_hasTypeFooter, "CerializedData_internal_hasTypeFooter( CerializedData* cerialized_data )" )
-  IT( "can report whether it has a type footer" )
+	//	creation/modification should be same
+	SHOULD_EQUAL(			cerialized_data->footer->creation_stamp.tv_usec, cerialized_data->footer->modification_stamp.tv_usec );
 
-  END_IT
-END_DESCRIBE
+	CerializedData_internal_updateDataFooter( cerialized_data );
 
-/******************
-*  hasDataFooter  *
-******************/
+	//	modification should have changed
+	SHOULD_NOT_EQUAL( cerialized_data->footer->creation_stamp.tv_usec, cerialized_data->footer->modification_stamp.tv_usec );
 
-DESCRIBE( CerializedData_internal_hasDataFooter, "CerializedData_internal_hasDataFooter( CerializedData* cerialized_data )" )
-  IT( "can report whether it has a data footer" )
-
-  END_IT
-END_DESCRIBE
-
-/*********************
-*  updateDataFooter  *
-*********************/
-
-DESCRIBE( CerializedData_internal_updateDataFooter, "CerializedData_internal_updateDataFooter( CerializedData* cerialized_data )" )
-  IT( "can update a footer that was previously created" )
+	CerializedData_free( & cerialized_data );
 
   END_IT
 END_DESCRIBE
+
+/**************************************************************************************************************/
+
+/*******************
+*  Cerialize_spec  *
+*******************/
 
 void Cerialize_spec( void )  {
   
-  CSpec_Run( DESCRIPTION( CerializedData_internal_createTypeFooter ), CSpec_NewOutputVerbose() );
+  CSpec_Run( DESCRIPTION( CerializedData_new ), CSpec_NewOutputVerbose() );
+  CSpec_Run( DESCRIPTION( CerializedData_setData_data_size ), CSpec_NewOutputVerbose() );
+  CSpec_Run( DESCRIPTION( CerializedData_setType_type ), CSpec_NewOutputVerbose() );
+  CSpec_Run( DESCRIPTION( CerializedData_creationStamp_modificationStamp ), CSpec_NewOutputVerbose() );
 
 }

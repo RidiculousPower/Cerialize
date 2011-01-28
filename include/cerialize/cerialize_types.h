@@ -48,8 +48,9 @@
 	};
 	
 	struct CerializedData	{
-		uint32_t																																							size;
+		uint32_t																																						size;
 		void*																																								data;
+		BOOL																																								free_does_not_free_data;
 		CerializeType*																																			type;
 		CerializedData_DataFooterTypeForVersion( CerializedDataFooterCurrentVersion )*			footer;
 	};
@@ -65,7 +66,7 @@
 
 		CerializeType											type;
 		
-		uint32_t*													magic_number;
+		uint32_t													magic_number[ 4 ];
 		
 	};
 

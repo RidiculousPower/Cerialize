@@ -1,20 +1,20 @@
 
-set( _RUBY_DEBUG_OUTPUT ON)
-#  make sure we have libdb
 find_package( Ruby REQUIRED )
+find_package( CSpec REQUIRED )
 find_package( Cerialize REQUIRED )
 
 get_directory_property( cmake_current_include_dir INCLUDE_DIRECTORIES )
 
 LINK_DIRECTORIES( "/usr/local/lib" )
-include_directories( ${RUBY_INCLUDE_DIRS} ${CERIALIZE_INCLUDE_DIR} )
+include_directories( ${RUBY_INCLUDE_DIRS} ${CSPEC_INCLUDE_DIR} ${CERIALIZE_INCLUDE_DIR} )
 
 #  define shared library with sources
 file( GLOB RCERIALIZE_SOURCE "*.c" )
 file( GLOB RCERIALIZE_HEADERS "${cmake_current_include_dir}/rcerialize/*.h" )
 
-add_library( rcerialize ${RCERIALIZE_SOURCE} )
-target_link_libraries( rcerialize ${RUBY_LIBRARY} )
+add_executable( rcerialize_spec ${RCERIALIZE_SOURCE} )
+target_link_libraries( rcerialize_spec ${RUBY_LIBRARY} )
+target_link_libraries( rcerialize_spec ${CSPEC_LIBRARY} )
 
 # use, i.e. don't skip the full RPATH for the build tree
 set( CMAKE_SKIP_BUILD_RPATH  OFF )
@@ -43,6 +43,6 @@ set_target_properties( rcerialize  PROPERTIES 	LINKER_LANGUAGE C
 			                                          C_FLAGS "-ggdb -fsigned-char -Wall -W -Wshadow -Wstrict-prototypes -Wpointer-arith -Wcast-qual -Winline -Werror" )
 
 # Installation of the library
-install( TARGETS rcerialize DESTINATION lib PERMISSIONS OWNER_READ GROUP_READ WORLD_READ )
+install( TARGETS rcerialize_spec DESTINATION lib PERMISSIONS OWNER_READ GROUP_READ WORLD_READ )
 INSTALL( FILES ${RCERIALIZE_HEADERS} DESTINATION "include/rcerialize" )
 INSTALL( FILES "${cmake_current_include_dir}/rcerialize.h" DESTINATION "include" )

@@ -4,7 +4,7 @@
 	#include <rbdb/CerializedData.h>
 	#include <rbdb/CerializedData_internal.h>
 	#include <ruby.h>	
-	#include "RcerializedData_type.h"
+	#include "rcerialize/rcerialize_types.h"
 
 CerializedData* Rcerialize_packRubyInstance(	VALUE							rb_object,
 																							CerializeType			c_storage_type,

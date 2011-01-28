@@ -8,10 +8,11 @@ include_directories( ${CSPEC_INCLUDE_DIR} )
 
 #  define shared library with sources
 file( GLOB CERIALIZE_SOURCE "*.c" )
-file( GLOB CERIALIZE_HEADERS "include/cerialize/*.h" )
+file( GLOB CERIALIZE_HEADERS "${cmake_current_include_dir}/cerialize/*.h" )
 
 add_executable( cerialize_spec ${CERIALIZE_SOURCE} )
 target_link_libraries( cerialize_spec ${CSPEC_LIBRARY} )
+target_link_libraries( cerialize_spec cerialize )
 
 # use, i.e. don't skip the full RPATH for the build tree
 set( CMAKE_SKIP_BUILD_RPATH  OFF )

@@ -1,7 +1,7 @@
 #include <cspec.h>
 
-#include "cerialize_spec.h"
-#include "cerialize_internal_spec.h"
+#include "cspec/cerialize_spec.h"
+#include "cspec/cerialize_internal_spec.h"
 
 int main( void )  {
   

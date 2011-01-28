@@ -10,6 +10,7 @@ include_directories( rcerialize/include )
 
 #  define sub-directories of source that cmake knows about as well a where their output will be put
 add_subdirectory( rcerialize )
+add_subdirectory( cspec )
 
 #  compiler-dependent flags:
 if( CMAKE_COMPILER_IS_GNUCC )
