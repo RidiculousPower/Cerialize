@@ -1,13 +1,6 @@
-/*
- *		Cerialize
- *
- *
- */
 
 #ifndef CERIALIZE_INTERNAL
 	#define CERIALIZE_INTERNAL
-
-	#include "Rbdb_BaseStandardInclude.h"
 
 	void CerializedData_internal_createTypeFooter( CerializedData* cerialized_data );
 	void CerializedData_internal_createDataFooter( CerializedData* cerialized_data );

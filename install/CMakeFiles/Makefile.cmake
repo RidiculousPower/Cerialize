@@ -26,15 +26,14 @@ SET(CMAKE_MAKEFILE_DEPENDS
   "/Applications/CMake 2.8-2.app/Contents/share/cmake-2.8/Modules/Compiler/Clang-C.cmake"
   "/Applications/CMake 2.8-2.app/Contents/share/cmake-2.8/Modules/Compiler/GNU-C.cmake"
   "/Applications/CMake 2.8-2.app/Contents/share/cmake-2.8/Modules/Compiler/GNU.cmake"
-  "/Applications/CMake 2.8-2.app/Contents/share/cmake-2.8/Modules/FindPackageHandleStandardArgs.cmake"
-  "/Applications/CMake 2.8-2.app/Contents/share/cmake-2.8/Modules/FindPackageMessage.cmake"
-  "/Applications/CMake 2.8-2.app/Contents/share/cmake-2.8/Modules/FindRuby.cmake"
   "/Applications/CMake 2.8-2.app/Contents/share/cmake-2.8/Modules/Platform/Darwin.cmake"
   "/Applications/CMake 2.8-2.app/Contents/share/cmake-2.8/Modules/Platform/UnixPaths.cmake"
-  "/Users/asher/Projects/rp/ruby/rargs/ext/CMakeLists.txt"
-  "/Users/asher/Projects/rp/ruby/rargs/ext/rargs/CMakeLists.txt"
+  "../CMakeLists.txt"
+  "../cmake/Modules/FindCSpec.cmake"
+  "../cspec/CMakeLists.txt"
   "CMakeFiles/CMakeCCompiler.cmake"
   "CMakeFiles/CMakeSystem.cmake"
+  "../src/CMakeLists.txt"
   )
 
 # The corresponding makefile is:
@@ -46,10 +45,12 @@ SET(CMAKE_MAKEFILE_OUTPUTS
 # Byproducts of CMake generate step:
 SET(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
-  "rargs/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "cspec/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 SET(CMAKE_DEPEND_INFO_FILES
-  "rargs/CMakeFiles/rargs.dir/DependInfo.cmake"
+  "src/CMakeFiles/cerialize.dir/DependInfo.cmake"
+  "cspec/CMakeFiles/cerialize_spec.dir/DependInfo.cmake"
   )

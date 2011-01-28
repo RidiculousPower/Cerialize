@@ -1,29 +1,43 @@
-cmake_minimum_required(VERSION 2.6)
 
-project( rargs_test C )
+find_package( CSpec REQUIRED )
 
-#  add local modules path for project
-set( CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/" )
+get_directory_property( cmake_current_include_dir INCLUDE_DIRECTORIES )
 
-#  where to look for source files (headers and source)
-include_directories( test ../ext/rargs )
+LINK_DIRECTORIES( "/usr/local/lib" )
+include_directories( ${CSPEC_INCLUDE_DIR} )
 
-#  define sub-directories of source that cmake knows about as well a where their output will be put
-add_subdirectory( test )
+#  define shared library with sources
+file( GLOB CERIALIZE_SOURCE "*.c" )
+file( GLOB CERIALIZE_HEADERS "include/cerialize/*.h" )
 
-#  compiler-dependent flags:
-if( CMAKE_COMPILER_IS_GNUCC )
-  #  gcc
-  add_definitions(-ggdb -fsigned-char -freg-struct-return -Wall -W -Wshadow -Wstrict-prototypes -Wpointer-arith -Wcast-qual -Winline -Werror)
-else( CMAKE_COMPILER_IS_GNUCC )
-  #  non-gcc (intended for clang)
-  add_definitions(-ggdb -fsigned-char -Wall -W -Wshadow -Wstrict-prototypes -Wpointer-arith -Wcast-qual -Winline -Werror)
-endif( CMAKE_COMPILER_IS_GNUCC )
+add_executable( cerialize_spec ${CERIALIZE_SOURCE} )
+target_link_libraries( cerialize_spec ${CSPEC_LIBRARY} )
 
-message( STATUS "Compiling with flags: ${CMAKE_C_FLAGS}" )
+# use, i.e. don't skip the full RPATH for the build tree
+set( CMAKE_SKIP_BUILD_RPATH  OFF )
 
-#  distribution configuration
-set(CMAKE_C_FLAGS_DISTRIBUTION "-O3")
-set(CMAKE_CXX_FLAGS_DISTRIBUTION "-O3")
+# when building, don't use the install RPATH already
+# (but later on when installing)
+set( CMAKE_BUILD_WITH_INSTALL_RPATH ON )
 
-set( CMAKE_VERBOSE_MAKEFILE ON )
+set( CMAKE_INSTALL_NAME_DIR "@rpath" )
+
+# the RPATH to be used when installing
+set( CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib" )
+
+# add the automatically determined parts of the RPATH
+# which point to directories outside the build tree to the install RPATH
+set( CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE )
+
+# Set the build version (VERSION) and the API version (SOVERSION)
+set_target_properties( cerialize_spec  PROPERTIES 	LINKER_LANGUAGE C 
+					                                          OUTPUT_NAME "../cerialize_spec"
+					                                          PREFIX ""
+					                                          SUFFIX ""
+					                                          LINK_FLAGS "-Wl,-rpath,-L${CMAKE_INSTALL_RPATH}"
+					                                          INSTALL_RPATH ${CMAKE_INSTALL_RPATH}
+					                                          INSTALL_NAME_DIR ${CMAKE_INSTALL_NAME_DIR}
+					                                          C_FLAGS "-ggdb -fsigned-char -Wall -W -Wshadow -Wstrict-prototypes -Wpointer-arith -Wcast-qual -Winline -Werror" )
+
+# Installation of the library
+#install( TARGETS cerialize DESTINATION lib PERMISSIONS OWNER_READ GROUP_READ WORLD_READ )

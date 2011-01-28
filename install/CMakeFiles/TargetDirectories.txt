@@ -1,1 +1,2 @@
-/Users/asher/Projects/rp/ruby/rargs/install/rargs/CMakeFiles/rargs.dir
+/Users/asher/Projects/rp/cerialize/install/src/CMakeFiles/cerialize.dir
+/Users/asher/Projects/rp/cerialize/install/cspec/CMakeFiles/cerialize_spec.dir

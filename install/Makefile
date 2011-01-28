@@ -42,10 +42,10 @@ RM = "/Applications/CMake 2.8-2.app/Contents/bin/cmake" -E remove -f
 CMAKE_EDIT_COMMAND = "/Applications/CMake 2.8-2.app/Contents/bin/ccmake"
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/asher/Projects/rp/ruby/rargs/ext
+CMAKE_SOURCE_DIR = /Users/asher/Projects/rp/cerialize
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/asher/Projects/rp/ruby/rargs/install
+CMAKE_BINARY_DIR = /Users/asher/Projects/rp/cerialize/install
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -113,9 +113,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/asher/Projects/rp/ruby/rargs/install/CMakeFiles /Users/asher/Projects/rp/ruby/rargs/install/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/asher/Projects/rp/cerialize/install/CMakeFiles /Users/asher/Projects/rp/cerialize/install/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/asher/Projects/rp/ruby/rargs/install/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/asher/Projects/rp/cerialize/install/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -143,17 +143,30 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named rargs
+# Target rules for targets named cerialize
 
 # Build rule for target.
-rargs: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 rargs
-.PHONY : rargs
+cerialize: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 cerialize
+.PHONY : cerialize
 
 # fast build rule for target.
-rargs/fast:
-	$(MAKE) -f rargs/CMakeFiles/rargs.dir/build.make rargs/CMakeFiles/rargs.dir/build
-.PHONY : rargs/fast
+cerialize/fast:
+	$(MAKE) -f src/CMakeFiles/cerialize.dir/build.make src/CMakeFiles/cerialize.dir/build
+.PHONY : cerialize/fast
+
+#=============================================================================
+# Target rules for targets named cerialize_spec
+
+# Build rule for target.
+cerialize_spec: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 cerialize_spec
+.PHONY : cerialize_spec
+
+# fast build rule for target.
+cerialize_spec/fast:
+	$(MAKE) -f cspec/CMakeFiles/cerialize_spec.dir/build.make cspec/CMakeFiles/cerialize_spec.dir/build
+.PHONY : cerialize_spec/fast
 
 # Help Target
 help:
@@ -167,7 +180,8 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... rargs"
+	@echo "... cerialize"
+	@echo "... cerialize_spec"
 .PHONY : help
 
 

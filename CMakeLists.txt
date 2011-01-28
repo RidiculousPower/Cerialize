@@ -1,15 +1,16 @@
 cmake_minimum_required(VERSION 2.6)
 
-project( rargs_test C )
+project( cerialize C )
 
 #  add local modules path for project
 set( CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/" )
 
 #  where to look for source files (headers and source)
-include_directories( test ../ext/rargs )
+include_directories( include )
 
 #  define sub-directories of source that cmake knows about as well a where their output will be put
-add_subdirectory( test )
+add_subdirectory( src )
+add_subdirectory( cspec )
 
 #  compiler-dependent flags:
 if( CMAKE_COMPILER_IS_GNUCC )

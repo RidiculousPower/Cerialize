@@ -50,59 +50,109 @@ RM = "/Applications/CMake 2.8-2.app/Contents/bin/cmake" -E remove -f
 CMAKE_EDIT_COMMAND = "/Applications/CMake 2.8-2.app/Contents/bin/ccmake"
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/asher/Projects/rp/ruby/rargs/ext
+CMAKE_SOURCE_DIR = /Users/asher/Projects/rp/cerialize
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/asher/Projects/rp/ruby/rargs/install
+CMAKE_BINARY_DIR = /Users/asher/Projects/rp/cerialize/install
 
 #=============================================================================
-# Directory level rules for directory rargs
+# Directory level rules for directory src
 
 # Convenience name for "all" pass in the directory.
-rargs/all: rargs/CMakeFiles/rargs.dir/all
-.PHONY : rargs/all
+src/all: src/CMakeFiles/cerialize.dir/all
+.PHONY : src/all
 
 # Convenience name for "clean" pass in the directory.
-rargs/clean: rargs/CMakeFiles/rargs.dir/clean
-.PHONY : rargs/clean
+src/clean: src/CMakeFiles/cerialize.dir/clean
+.PHONY : src/clean
 
 # Convenience name for "preinstall" pass in the directory.
-rargs/preinstall:
-.PHONY : rargs/preinstall
+src/preinstall:
+.PHONY : src/preinstall
 
 #=============================================================================
-# Target rules for target rargs/CMakeFiles/rargs.dir
+# Target rules for target src/CMakeFiles/cerialize.dir
 
 # All Build rule for target.
-rargs/CMakeFiles/rargs.dir/all:
-	$(MAKE) -f rargs/CMakeFiles/rargs.dir/build.make rargs/CMakeFiles/rargs.dir/depend
-	$(MAKE) -f rargs/CMakeFiles/rargs.dir/build.make rargs/CMakeFiles/rargs.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /Users/asher/Projects/rp/ruby/rargs/install/CMakeFiles  1 2 3 4 5 6
-	@echo "Built target rargs"
-.PHONY : rargs/CMakeFiles/rargs.dir/all
+src/CMakeFiles/cerialize.dir/all:
+	$(MAKE) -f src/CMakeFiles/cerialize.dir/build.make src/CMakeFiles/cerialize.dir/depend
+	$(MAKE) -f src/CMakeFiles/cerialize.dir/build.make src/CMakeFiles/cerialize.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /Users/asher/Projects/rp/cerialize/install/CMakeFiles  1
+	@echo "Built target cerialize"
+.PHONY : src/CMakeFiles/cerialize.dir/all
 
 # Include target in all.
-all: rargs/CMakeFiles/rargs.dir/all
+all: src/CMakeFiles/cerialize.dir/all
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-rargs/CMakeFiles/rargs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/asher/Projects/rp/ruby/rargs/install/CMakeFiles 6
-	$(MAKE) -f CMakeFiles/Makefile2 rargs/CMakeFiles/rargs.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/asher/Projects/rp/ruby/rargs/install/CMakeFiles 0
-.PHONY : rargs/CMakeFiles/rargs.dir/rule
+src/CMakeFiles/cerialize.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/asher/Projects/rp/cerialize/install/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/cerialize.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/asher/Projects/rp/cerialize/install/CMakeFiles 0
+.PHONY : src/CMakeFiles/cerialize.dir/rule
 
 # Convenience name for target.
-rargs: rargs/CMakeFiles/rargs.dir/rule
-.PHONY : rargs
+cerialize: src/CMakeFiles/cerialize.dir/rule
+.PHONY : cerialize
 
 # clean rule for target.
-rargs/CMakeFiles/rargs.dir/clean:
-	$(MAKE) -f rargs/CMakeFiles/rargs.dir/build.make rargs/CMakeFiles/rargs.dir/clean
-.PHONY : rargs/CMakeFiles/rargs.dir/clean
+src/CMakeFiles/cerialize.dir/clean:
+	$(MAKE) -f src/CMakeFiles/cerialize.dir/build.make src/CMakeFiles/cerialize.dir/clean
+.PHONY : src/CMakeFiles/cerialize.dir/clean
 
 # clean rule for target.
-clean: rargs/CMakeFiles/rargs.dir/clean
+clean: src/CMakeFiles/cerialize.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory cspec
+
+# Convenience name for "all" pass in the directory.
+cspec/all: cspec/CMakeFiles/cerialize_spec.dir/all
+.PHONY : cspec/all
+
+# Convenience name for "clean" pass in the directory.
+cspec/clean: cspec/CMakeFiles/cerialize_spec.dir/clean
+.PHONY : cspec/clean
+
+# Convenience name for "preinstall" pass in the directory.
+cspec/preinstall:
+.PHONY : cspec/preinstall
+
+#=============================================================================
+# Target rules for target cspec/CMakeFiles/cerialize_spec.dir
+
+# All Build rule for target.
+cspec/CMakeFiles/cerialize_spec.dir/all:
+	$(MAKE) -f cspec/CMakeFiles/cerialize_spec.dir/build.make cspec/CMakeFiles/cerialize_spec.dir/depend
+	$(MAKE) -f cspec/CMakeFiles/cerialize_spec.dir/build.make cspec/CMakeFiles/cerialize_spec.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /Users/asher/Projects/rp/cerialize/install/CMakeFiles  2 3 4
+	@echo "Built target cerialize_spec"
+.PHONY : cspec/CMakeFiles/cerialize_spec.dir/all
+
+# Include target in all.
+all: cspec/CMakeFiles/cerialize_spec.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+cspec/CMakeFiles/cerialize_spec.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/asher/Projects/rp/cerialize/install/CMakeFiles 3
+	$(MAKE) -f CMakeFiles/Makefile2 cspec/CMakeFiles/cerialize_spec.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/asher/Projects/rp/cerialize/install/CMakeFiles 0
+.PHONY : cspec/CMakeFiles/cerialize_spec.dir/rule
+
+# Convenience name for target.
+cerialize_spec: cspec/CMakeFiles/cerialize_spec.dir/rule
+.PHONY : cerialize_spec
+
+# clean rule for target.
+cspec/CMakeFiles/cerialize_spec.dir/clean:
+	$(MAKE) -f cspec/CMakeFiles/cerialize_spec.dir/build.make cspec/CMakeFiles/cerialize_spec.dir/clean
+.PHONY : cspec/CMakeFiles/cerialize_spec.dir/clean
+
+# clean rule for target.
+clean: cspec/CMakeFiles/cerialize_spec.dir/clean
 .PHONY : clean
 
 #=============================================================================
