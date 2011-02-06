@@ -1,7 +1,7 @@
 #ifndef RCERIALIZE_TYPE
 	#define RCERIALIZE_TYPE
 
-	#include <rbdb/CerializedData.h>
+	#include <cerialize.h>
 	#include <ruby.h>
 
 	CerializeType Rcerialize_storageTypeForRubyInstance(	VALUE		rb_object );

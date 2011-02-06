@@ -35,10 +35,17 @@ CerializedData* CerializedData_new(	void**			raw_data,
 	cerialized_data->size	=	raw_data_size;
 	
 	if ( CerializedData_internal_hasTypeFooter( cerialized_data ) )	{
-		
+	
+		CerializedTypeFooter*		type_footer	=	cerialized_data->data + cerialized_data->size - sizeof( CerializedTypeFooter );
+		cerialized_data->type	=		& type_footer->type;
 	}
 	else if ( CerializedData_internal_hasDataFooter( cerialized_data ) )	{
-	
+		
+		CerializedData_DataFooterTypeForVersion( CerializedDataFooterCurrentVersion )*	data_footer	=	cerialized_data->data 
+																																																+ cerialized_data->size 
+																																																- sizeof( CerializedData_DataFooterTypeForVersion( CerializedDataFooterCurrentVersion ) );
+		cerialized_data->footer	=		data_footer;		
+		cerialized_data->type		=		& data_footer->type;
 	}
 	
 	return cerialized_data;
@@ -98,7 +105,7 @@ void CerializedData_setData(	CerializedData*		cerialized_data,
 				
 		//	re-allocate data to hold footer at end
 		*data_raw	=	realloc( *data_raw, data_size + sizeof( CerializedData_DataFooterTypeForVersion( CerializedDataFooterCurrentVersion ) ) );
-
+		
 		//	copy footer to new data
 		memcpy(	*data_raw + data_size,
 						cerialized_data->footer,
@@ -158,22 +165,13 @@ CerializeType CerializedData_type( CerializedData* cerialized_data )	{
 void CerializedData_setType(	CerializedData*		cerialized_data,
 															CerializeType			type )	{
 
-	if ( cerialized_data->type != NULL )	{
+	if ( cerialized_data->type == NULL )	{
 
-		*cerialized_data->type				=	type;
-	
-	}
-	else {
-		
-		cerialized_data->type					=	cerialized_data->data + cerialized_data->size;
-		
-		//	realloc for type
-		cerialized_data->data					=	realloc( cerialized_data->data, cerialized_data->size + sizeof( CerializedTypeFooter ) );
-		
-		*cerialized_data->type				=	type;
+		CerializedData_internal_createTypeFooter( cerialized_data );
 		
 	}
 
+	*cerialized_data->type				=		type;
 }
 
 /*********

@@ -1,10 +1,9 @@
 #ifndef RCERIALIZE_PACK
 	#define RCERIALIZE_PACK
 
-	#include <rbdb/CerializedData.h>
-	#include <rbdb/CerializedData_internal.h>
+	#include <cerialize.h>
 	#include <ruby.h>	
-	#include "rcerialize/rcerialize_types.h"
+	#include "rcerialize/rcerialize_type.h"
 
 CerializedData* Rcerialize_packRubyInstance(	VALUE							rb_object,
 																							CerializeType			c_storage_type,
@@ -23,9 +22,6 @@ CerializedData* Rcerialize_packRubyInstance(	VALUE							rb_object,
 	CerializedData* Rcerialize_packRubyTrueFalse(	VALUE		rb_true_false );
 	CerializedData* Rcerialize_packRubyArray(	VALUE		rb_array );
 	CerializedData* Rcerialize_packRubyHash(	VALUE		rb_hash );
-		static int Rcerialize_iterateRubyHashForCerializedData(	VALUE												rb_key,
-																														VALUE												rb_data,
-																														RcerializeHashForeachInfo*	c_passed_info );
 	CerializedData* Rcerialize_packRubyStruct(	VALUE		rb_struct );
 	CerializedData* Rcerialize_packRubyNamedStruct(	VALUE		rb_struct );
 		CerializedData* Rcerialize_packRubyKeyDataPair(	VALUE		rb_key,

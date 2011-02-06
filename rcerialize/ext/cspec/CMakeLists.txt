@@ -15,6 +15,8 @@ file( GLOB RCERIALIZE_HEADERS "${cmake_current_include_dir}/rcerialize/*.h" )
 add_executable( rcerialize_spec ${RCERIALIZE_SOURCE} )
 target_link_libraries( rcerialize_spec ${RUBY_LIBRARY} )
 target_link_libraries( rcerialize_spec ${CSPEC_LIBRARY} )
+target_link_libraries( rcerialize_spec cerialize )
+target_link_libraries( rcerialize_spec rcerialize )
 
 # use, i.e. don't skip the full RPATH for the build tree
 set( CMAKE_SKIP_BUILD_RPATH  OFF )
@@ -33,14 +35,14 @@ set( CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib" )
 set( CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE )
 
 # Set the build version (VERSION) and the API version (SOVERSION)
-set_target_properties( rcerialize  PROPERTIES 	LINKER_LANGUAGE C 
-			                                          OUTPUT_NAME "../librcerialize"
-			                                          PREFIX ""
-			                                          SUFFIX ".dylib"
-			                                          LINK_FLAGS "-Wl,-rpath,-L${CMAKE_INSTALL_RPATH}"
-			                                          INSTALL_RPATH ${CMAKE_INSTALL_RPATH}
-			                                          INSTALL_NAME_DIR ${CMAKE_INSTALL_NAME_DIR}
-			                                          C_FLAGS "-ggdb -fsigned-char -Wall -W -Wshadow -Wstrict-prototypes -Wpointer-arith -Wcast-qual -Winline -Werror" )
+set_target_properties( rcerialize_spec  PROPERTIES 	LINKER_LANGUAGE C 
+					                                          OUTPUT_NAME "../rcerialize_cspec"
+					                                          PREFIX ""
+					                                          SUFFIX ""
+					                                          LINK_FLAGS "-Wl,-rpath,-L${CMAKE_INSTALL_RPATH}"
+					                                          INSTALL_RPATH ${CMAKE_INSTALL_RPATH}
+					                                          INSTALL_NAME_DIR ${CMAKE_INSTALL_NAME_DIR}
+					                                          C_FLAGS "-ggdb -fsigned-char -Wall -W -Wshadow -Wstrict-prototypes -Wpointer-arith -Wcast-qual -Winline -Werror" )
 
 # Installation of the library
 install( TARGETS rcerialize_spec DESTINATION lib PERMISSIONS OWNER_READ GROUP_READ WORLD_READ )

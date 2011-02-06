@@ -1,4 +1,0 @@
-#ifndef RCERIALIZE_PACK_SPEC
-	#define RCERIALIZE_PACK_SPEC
-
-#endif

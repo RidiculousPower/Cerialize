@@ -1,7 +1,7 @@
 The system is: Darwin - 10.6.0 - i386
 Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
-Compiler: /Developer/usr/bin/gcc 
-Build flags: 
+Compiler: /usr/bin/clang 
+Build flags: -march=x86-64;-g;-fno-common;-fsigned-char;-pipe;-Wall;-Wextra;-fcatch-undefined-behavior
 Id flags: 
 
 The output was:
@@ -10,7 +10,9 @@ The output was:
 
 Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
 
-The C compiler identification is GNU, found in "/Users/asher/Projects/rp/cerialize/install/CMakeFiles/CompilerIdC/a.out"
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out.dSYM"
+
+The C compiler identification is Clang, found in "/Users/asher/Projects/rp/cerialize/install/CMakeFiles/CompilerIdC/a.out"
 
 Determining if the C compiler works passed with the following output:
 Change Dir: /Users/asher/Projects/rp/cerialize/install/CMakeFiles/CMakeTmp
@@ -19,10 +21,10 @@ Run Build Command:/Developer/usr/bin/make "cmTryCompileExec/fast"
 /Developer/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
 "/Applications/CMake 2.8-2.app/Contents/bin/cmake" -E cmake_progress_report /Users/asher/Projects/rp/cerialize/install/CMakeFiles/CMakeTmp/CMakeFiles 1
 Building C object CMakeFiles/cmTryCompileExec.dir/testCCompiler.c.o
-/Developer/usr/bin/gcc   -mmacosx-version-min=10.6   -o CMakeFiles/cmTryCompileExec.dir/testCCompiler.c.o   -c /Users/asher/Projects/rp/cerialize/install/CMakeFiles/CMakeTmp/testCCompiler.c
+/usr/bin/clang   -march=x86-64 -g -fno-common -fsigned-char -pipe -Wall -Wextra -fcatch-undefined-behavior      -o CMakeFiles/cmTryCompileExec.dir/testCCompiler.c.o   -c /Users/asher/Projects/rp/cerialize/install/CMakeFiles/CMakeTmp/testCCompiler.c
 Linking C executable cmTryCompileExec
 "/Applications/CMake 2.8-2.app/Contents/bin/cmake" -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
-/Developer/usr/bin/gcc      -mmacosx-version-min=10.6 -Wl,-search_paths_first -headerpad_max_install_names  CMakeFiles/cmTryCompileExec.dir/testCCompiler.c.o  -o cmTryCompileExec  
+/usr/bin/clang   -march=x86-64 -g -fno-common -fsigned-char -pipe -Wall -Wextra -fcatch-undefined-behavior    -Wl,-search_paths_first -headerpad_max_install_names  CMakeFiles/cmTryCompileExec.dir/testCCompiler.c.o  -o cmTryCompileExec  
 
 
 Detecting C compiler ABI info compiled with the following output:
@@ -32,16 +34,14 @@ Run Build Command:/Developer/usr/bin/make "cmTryCompileExec/fast"
 /Developer/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
 "/Applications/CMake 2.8-2.app/Contents/bin/cmake" -E cmake_progress_report /Users/asher/Projects/rp/cerialize/install/CMakeFiles/CMakeTmp/CMakeFiles 1
 Building C object CMakeFiles/cmTryCompileExec.dir/CMakeCCompilerABI.c.o
-/Developer/usr/bin/gcc   -mmacosx-version-min=10.6   -o CMakeFiles/cmTryCompileExec.dir/CMakeCCompilerABI.c.o   -c "/Applications/CMake 2.8-2.app/Contents/share/cmake-2.8/Modules/CMakeCCompilerABI.c"
+/usr/bin/clang   -march=x86-64 -g -fno-common -fsigned-char -pipe -Wall -Wextra -fcatch-undefined-behavior      -o CMakeFiles/cmTryCompileExec.dir/CMakeCCompilerABI.c.o   -c "/Applications/CMake 2.8-2.app/Contents/share/cmake-2.8/Modules/CMakeCCompilerABI.c"
 Linking C executable cmTryCompileExec
 "/Applications/CMake 2.8-2.app/Contents/bin/cmake" -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
-/Developer/usr/bin/gcc      -mmacosx-version-min=10.6 -Wl,-search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTryCompileExec.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec   
-Using built-in specs.
-Target: i686-apple-darwin10
-Configured with: /var/tmp/gcc/gcc-5664~89/src/configure --disable-checking --enable-werror --prefix=/usr --mandir=/share/man --enable-languages=c,objc,c++,obj-c++ --program-transform-name=/^[cg][^.-]*$/s/$/-4.2/ --with-slibdir=/usr/lib --build=i686-apple-darwin10 --program-prefix=i686-apple-darwin10- --host=x86_64-apple-darwin10 --target=i686-apple-darwin10 --with-gxx-include-dir=/include/c++/4.2.1
+/usr/bin/clang   -march=x86-64 -g -fno-common -fsigned-char -pipe -Wall -Wextra -fcatch-undefined-behavior    -Wl,-search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTryCompileExec.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec   
+Apple clang version 2.0 (tags/Apple/clang-134) (based on LLVM 2.9svn)
+Target: x86_64-apple-darwin10
 Thread model: posix
-gcc version 4.2.1 (Apple Inc. build 5664)
- /Developer/usr/bin/../libexec/gcc/i686-apple-darwin10/4.2.1/collect2 -dynamic -arch x86_64 -headerpad_max_install_names -macosx_version_min 10.6 -weak_reference_mismatches non-weak -o cmTryCompileExec -lcrt1.10.6.o -L/Developer/usr/bin/../lib/gcc/i686-apple-darwin10/4.2.1/x86_64 -L/usr/lib/gcc/i686-apple-darwin10/4.2.1/x86_64 -L/usr/lib/gcc/i686-apple-darwin10/4.2.1/x86_64 -L/usr/lib/i686-apple-darwin10/4.2.1 -L/Developer/usr/bin/../lib/gcc/i686-apple-darwin10/4.2.1 -L/Developer/usr/bin/../lib/gcc -L/usr/lib/gcc/i686-apple-darwin10/4.2.1 -L/usr/lib/gcc/i686-apple-darwin10/4.2.1 -L/Developer/usr/bin/../lib/gcc/i686-apple-darwin10/4.2.1/../../../i686-apple-darwin10/4.2.1 -L/Developer/usr/bin/../lib/gcc/i686-apple-darwin10/4.2.1/../../.. -L/usr/lib/gcc/i686-apple-darwin10/4.2.1/../../../i686-apple-darwin10/4.2.1 -L/usr/lib/gcc/i686-apple-darwin10/4.2.1/../../.. -search_paths_first CMakeFiles/cmTryCompileExec.dir/CMakeCCompilerABI.c.o -lSystem -lgcc -lSystem
+ "/usr/bin/ld" -demangle -dynamic -arch x86_64 -headerpad_max_install_names -macosx_version_min 10.6 -o cmTryCompileExec -lcrt1.10.6.o -L/usr/lib/gcc/i686-apple-darwin10/4.2.1/x86_64 -L/usr/lib/gcc/i686-apple-darwin10/4.2.1 -search_paths_first CMakeFiles/cmTryCompileExec.dir/CMakeCCompilerABI.c.o -lSystem
 
 
 Parsed C implicit link information from above output:
@@ -52,62 +52,35 @@ Parsed C implicit link information from above output:
   ignore line: [/Developer/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build]
   ignore line: ["/Applications/CMake 2.8-2.app/Contents/bin/cmake" -E cmake_progress_report /Users/asher/Projects/rp/cerialize/install/CMakeFiles/CMakeTmp/CMakeFiles 1]
   ignore line: [Building C object CMakeFiles/cmTryCompileExec.dir/CMakeCCompilerABI.c.o]
-  ignore line: [/Developer/usr/bin/gcc   -mmacosx-version-min=10.6   -o CMakeFiles/cmTryCompileExec.dir/CMakeCCompilerABI.c.o   -c "/Applications/CMake 2.8-2.app/Contents/share/cmake-2.8/Modules/CMakeCCompilerABI.c"]
+  ignore line: [/usr/bin/clang   -march=x86-64 -g -fno-common -fsigned-char -pipe -Wall -Wextra -fcatch-undefined-behavior      -o CMakeFiles/cmTryCompileExec.dir/CMakeCCompilerABI.c.o   -c "/Applications/CMake 2.8-2.app/Contents/share/cmake-2.8/Modules/CMakeCCompilerABI.c"]
   ignore line: [Linking C executable cmTryCompileExec]
   ignore line: ["/Applications/CMake 2.8-2.app/Contents/bin/cmake" -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1]
-  ignore line: [/Developer/usr/bin/gcc      -mmacosx-version-min=10.6 -Wl,-search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTryCompileExec.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec   ]
-  ignore line: [Using built-in specs.]
-  ignore line: [Target: i686-apple-darwin10]
-  ignore line: [Configured with: /var/tmp/gcc/gcc-5664~89/src/configure --disable-checking --enable-werror --prefix=/usr --mandir=/share/man --enable-languages=c,objc,c++,obj-c++ --program-transform-name=/^[cg][^.-]*$/s/$/-4.2/ --with-slibdir=/usr/lib --build=i686-apple-darwin10 --program-prefix=i686-apple-darwin10- --host=x86_64-apple-darwin10 --target=i686-apple-darwin10 --with-gxx-include-dir=/include/c++/4.2.1]
+  ignore line: [/usr/bin/clang   -march=x86-64 -g -fno-common -fsigned-char -pipe -Wall -Wextra -fcatch-undefined-behavior    -Wl,-search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTryCompileExec.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec   ]
+  ignore line: [Apple clang version 2.0 (tags/Apple/clang-134) (based on LLVM 2.9svn)]
+  ignore line: [Target: x86_64-apple-darwin10]
   ignore line: [Thread model: posix]
-  ignore line: [gcc version 4.2.1 (Apple Inc. build 5664)]
-  link line: [ /Developer/usr/bin/../libexec/gcc/i686-apple-darwin10/4.2.1/collect2 -dynamic -arch x86_64 -headerpad_max_install_names -macosx_version_min 10.6 -weak_reference_mismatches non-weak -o cmTryCompileExec -lcrt1.10.6.o -L/Developer/usr/bin/../lib/gcc/i686-apple-darwin10/4.2.1/x86_64 -L/usr/lib/gcc/i686-apple-darwin10/4.2.1/x86_64 -L/usr/lib/gcc/i686-apple-darwin10/4.2.1/x86_64 -L/usr/lib/i686-apple-darwin10/4.2.1 -L/Developer/usr/bin/../lib/gcc/i686-apple-darwin10/4.2.1 -L/Developer/usr/bin/../lib/gcc -L/usr/lib/gcc/i686-apple-darwin10/4.2.1 -L/usr/lib/gcc/i686-apple-darwin10/4.2.1 -L/Developer/usr/bin/../lib/gcc/i686-apple-darwin10/4.2.1/../../../i686-apple-darwin10/4.2.1 -L/Developer/usr/bin/../lib/gcc/i686-apple-darwin10/4.2.1/../../.. -L/usr/lib/gcc/i686-apple-darwin10/4.2.1/../../../i686-apple-darwin10/4.2.1 -L/usr/lib/gcc/i686-apple-darwin10/4.2.1/../../.. -search_paths_first CMakeFiles/cmTryCompileExec.dir/CMakeCCompilerABI.c.o -lSystem -lgcc -lSystem]
-    arg [/Developer/usr/bin/../libexec/gcc/i686-apple-darwin10/4.2.1/collect2] ==> ignore
+  link line: [ "/usr/bin/ld" -demangle -dynamic -arch x86_64 -headerpad_max_install_names -macosx_version_min 10.6 -o cmTryCompileExec -lcrt1.10.6.o -L/usr/lib/gcc/i686-apple-darwin10/4.2.1/x86_64 -L/usr/lib/gcc/i686-apple-darwin10/4.2.1 -search_paths_first CMakeFiles/cmTryCompileExec.dir/CMakeCCompilerABI.c.o -lSystem]
+    arg [/usr/bin/ld] ==> ignore
+    arg [-demangle] ==> ignore
     arg [-dynamic] ==> ignore
     arg [-arch] ==> ignore
     arg [x86_64] ==> ignore
     arg [-headerpad_max_install_names] ==> ignore
     arg [-macosx_version_min] ==> ignore
     arg [10.6] ==> ignore
-    arg [-weak_reference_mismatches] ==> ignore
-    arg [non-weak] ==> ignore
     arg [-o] ==> ignore
     arg [cmTryCompileExec] ==> ignore
     arg [-lcrt1.10.6.o] ==> lib [crt1.10.6.o]
-    arg [-L/Developer/usr/bin/../lib/gcc/i686-apple-darwin10/4.2.1/x86_64] ==> dir [/Developer/usr/bin/../lib/gcc/i686-apple-darwin10/4.2.1/x86_64]
     arg [-L/usr/lib/gcc/i686-apple-darwin10/4.2.1/x86_64] ==> dir [/usr/lib/gcc/i686-apple-darwin10/4.2.1/x86_64]
-    arg [-L/usr/lib/gcc/i686-apple-darwin10/4.2.1/x86_64] ==> dir [/usr/lib/gcc/i686-apple-darwin10/4.2.1/x86_64]
-    arg [-L/usr/lib/i686-apple-darwin10/4.2.1] ==> dir [/usr/lib/i686-apple-darwin10/4.2.1]
-    arg [-L/Developer/usr/bin/../lib/gcc/i686-apple-darwin10/4.2.1] ==> dir [/Developer/usr/bin/../lib/gcc/i686-apple-darwin10/4.2.1]
-    arg [-L/Developer/usr/bin/../lib/gcc] ==> dir [/Developer/usr/bin/../lib/gcc]
     arg [-L/usr/lib/gcc/i686-apple-darwin10/4.2.1] ==> dir [/usr/lib/gcc/i686-apple-darwin10/4.2.1]
-    arg [-L/usr/lib/gcc/i686-apple-darwin10/4.2.1] ==> dir [/usr/lib/gcc/i686-apple-darwin10/4.2.1]
-    arg [-L/Developer/usr/bin/../lib/gcc/i686-apple-darwin10/4.2.1/../../../i686-apple-darwin10/4.2.1] ==> dir [/Developer/usr/bin/../lib/gcc/i686-apple-darwin10/4.2.1/../../../i686-apple-darwin10/4.2.1]
-    arg [-L/Developer/usr/bin/../lib/gcc/i686-apple-darwin10/4.2.1/../../..] ==> dir [/Developer/usr/bin/../lib/gcc/i686-apple-darwin10/4.2.1/../../..]
-    arg [-L/usr/lib/gcc/i686-apple-darwin10/4.2.1/../../../i686-apple-darwin10/4.2.1] ==> dir [/usr/lib/gcc/i686-apple-darwin10/4.2.1/../../../i686-apple-darwin10/4.2.1]
-    arg [-L/usr/lib/gcc/i686-apple-darwin10/4.2.1/../../..] ==> dir [/usr/lib/gcc/i686-apple-darwin10/4.2.1/../../..]
     arg [-search_paths_first] ==> ignore
     arg [CMakeFiles/cmTryCompileExec.dir/CMakeCCompilerABI.c.o] ==> ignore
     arg [-lSystem] ==> lib [System]
-    arg [-lgcc] ==> lib [gcc]
-    arg [-lSystem] ==> lib [System]
   remove lib [crt1.10.6.o]
   remove lib [System]
-  remove lib [gcc]
-  remove lib [System]
-  collapse dir [/Developer/usr/bin/../lib/gcc/i686-apple-darwin10/4.2.1/x86_64] ==> [/Developer/usr/lib/gcc/i686-apple-darwin10/4.2.1/x86_64]
   collapse dir [/usr/lib/gcc/i686-apple-darwin10/4.2.1/x86_64] ==> [/usr/lib/gcc/i686-apple-darwin10/4.2.1/x86_64]
-  collapse dir [/usr/lib/gcc/i686-apple-darwin10/4.2.1/x86_64] ==> [/usr/lib/gcc/i686-apple-darwin10/4.2.1/x86_64]
-  collapse dir [/usr/lib/i686-apple-darwin10/4.2.1] ==> [/usr/lib/i686-apple-darwin10/4.2.1]
-  collapse dir [/Developer/usr/bin/../lib/gcc/i686-apple-darwin10/4.2.1] ==> [/Developer/usr/lib/gcc/i686-apple-darwin10/4.2.1]
-  collapse dir [/Developer/usr/bin/../lib/gcc] ==> [/Developer/usr/lib/gcc]
   collapse dir [/usr/lib/gcc/i686-apple-darwin10/4.2.1] ==> [/usr/lib/gcc/i686-apple-darwin10/4.2.1]
-  collapse dir [/usr/lib/gcc/i686-apple-darwin10/4.2.1] ==> [/usr/lib/gcc/i686-apple-darwin10/4.2.1]
-  collapse dir [/Developer/usr/bin/../lib/gcc/i686-apple-darwin10/4.2.1/../../../i686-apple-darwin10/4.2.1] ==> [/Developer/usr/lib/i686-apple-darwin10/4.2.1]
-  collapse dir [/Developer/usr/bin/../lib/gcc/i686-apple-darwin10/4.2.1/../../..] ==> [/Developer/usr/lib]
-  collapse dir [/usr/lib/gcc/i686-apple-darwin10/4.2.1/../../../i686-apple-darwin10/4.2.1] ==> [/usr/lib/i686-apple-darwin10/4.2.1]
-  collapse dir [/usr/lib/gcc/i686-apple-darwin10/4.2.1/../../..] ==> [/usr/lib]
   implicit libs: []
-  implicit dirs: [/Developer/usr/lib/gcc/i686-apple-darwin10/4.2.1/x86_64;/usr/lib/gcc/i686-apple-darwin10/4.2.1/x86_64;/usr/lib/i686-apple-darwin10/4.2.1;/Developer/usr/lib/gcc/i686-apple-darwin10/4.2.1;/Developer/usr/lib/gcc;/usr/lib/gcc/i686-apple-darwin10/4.2.1;/Developer/usr/lib/i686-apple-darwin10/4.2.1;/Developer/usr/lib;/usr/lib]
+  implicit dirs: [/usr/lib/gcc/i686-apple-darwin10/4.2.1/x86_64;/usr/lib/gcc/i686-apple-darwin10/4.2.1]
 
 

@@ -1,5 +1,0 @@
-#ifndef RCERIALIZE_UNPACK_SPEC
-	#define RCERIALIZE_UNPACK_SPEC
-
-
-#endif
