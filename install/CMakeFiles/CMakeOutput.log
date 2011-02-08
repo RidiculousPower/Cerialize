@@ -41,7 +41,7 @@ Linking C executable cmTryCompileExec
 Apple clang version 2.0 (tags/Apple/clang-134) (based on LLVM 2.9svn)
 Target: x86_64-apple-darwin10
 Thread model: posix
- "/usr/bin/ld" -demangle -dynamic -arch x86_64 -headerpad_max_install_names -macosx_version_min 10.6 -o cmTryCompileExec -lcrt1.10.6.o -L/usr/lib/gcc/i686-apple-darwin10/4.2.1/x86_64 -L/usr/lib/gcc/i686-apple-darwin10/4.2.1 -search_paths_first CMakeFiles/cmTryCompileExec.dir/CMakeCCompilerABI.c.o -lSystem
+ "/usr/bin/ld" -demangle -dynamic -arch x86_64 -headerpad_max_install_names -macosx_version_min 10.6.0 -o cmTryCompileExec -lcrt1.10.6.o -L/usr/lib/gcc/i686-apple-darwin10/4.2.1/x86_64 -L/usr/lib/gcc/i686-apple-darwin10/4.2.1 -search_paths_first CMakeFiles/cmTryCompileExec.dir/CMakeCCompilerABI.c.o -lSystem
 
 
 Parsed C implicit link information from above output:
@@ -59,7 +59,7 @@ Parsed C implicit link information from above output:
   ignore line: [Apple clang version 2.0 (tags/Apple/clang-134) (based on LLVM 2.9svn)]
   ignore line: [Target: x86_64-apple-darwin10]
   ignore line: [Thread model: posix]
-  link line: [ "/usr/bin/ld" -demangle -dynamic -arch x86_64 -headerpad_max_install_names -macosx_version_min 10.6 -o cmTryCompileExec -lcrt1.10.6.o -L/usr/lib/gcc/i686-apple-darwin10/4.2.1/x86_64 -L/usr/lib/gcc/i686-apple-darwin10/4.2.1 -search_paths_first CMakeFiles/cmTryCompileExec.dir/CMakeCCompilerABI.c.o -lSystem]
+  link line: [ "/usr/bin/ld" -demangle -dynamic -arch x86_64 -headerpad_max_install_names -macosx_version_min 10.6.0 -o cmTryCompileExec -lcrt1.10.6.o -L/usr/lib/gcc/i686-apple-darwin10/4.2.1/x86_64 -L/usr/lib/gcc/i686-apple-darwin10/4.2.1 -search_paths_first CMakeFiles/cmTryCompileExec.dir/CMakeCCompilerABI.c.o -lSystem]
     arg [/usr/bin/ld] ==> ignore
     arg [-demangle] ==> ignore
     arg [-dynamic] ==> ignore
@@ -67,7 +67,7 @@ Parsed C implicit link information from above output:
     arg [x86_64] ==> ignore
     arg [-headerpad_max_install_names] ==> ignore
     arg [-macosx_version_min] ==> ignore
-    arg [10.6] ==> ignore
+    arg [10.6.0] ==> ignore
     arg [-o] ==> ignore
     arg [cmTryCompileExec] ==> ignore
     arg [-lcrt1.10.6.o] ==> lib [crt1.10.6.o]

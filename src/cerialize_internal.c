@@ -48,6 +48,19 @@ void CerializedData_internal_createTypeFooter( CerializedData* cerialized_data )
 
 void CerializedData_internal_createDataFooter( CerializedData* cerialized_data )	{
 
+  CerializeType type =  CerializeType_Raw;
+
+  //  if we have a type footer already we need to convert it to a data footer
+  if ( CerializedData_internal_hasTypeFooter( cerialized_data ) ) {
+  
+    //  get the type
+    type  = CerializedData_type( cerialized_data );
+    
+    //  remove type footer size for realloc to add size for data footer
+    cerialized_data->size -=  sizeof( CerializedTypeFooter );
+    
+  }
+
 	cerialized_data->size		+=	sizeof( CerializedData_DataFooterTypeForVersion( CerializedDataFooterCurrentVersion ) );
 	if ( cerialized_data->data == NULL )	{
 		cerialized_data->data		=		calloc( 1, cerialized_data->size );	
@@ -57,6 +70,10 @@ void CerializedData_internal_createDataFooter( CerializedData* cerialized_data )
 	}
 
 	cerialized_data->footer		=	cerialized_data->data + cerialized_data->size - sizeof( CerializedData_DataFooterTypeForVersion( CerializedDataFooterCurrentVersion ) );
+  
+  //  * type
+  cerialized_data->footer->type = type;
+	cerialized_data->type         =	& cerialized_data->footer->type;
 
 	//	* magic number for identifying presence of data footer ("1 food, face food!")
 	cerialized_data->footer->magic_number[ 0 ]	=	0x1;

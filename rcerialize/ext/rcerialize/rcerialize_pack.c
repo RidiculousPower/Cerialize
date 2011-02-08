@@ -80,6 +80,22 @@ CerializedData* Rcerialize_packRubyInstance(	VALUE							rb_object,
 		case CerializeType_TrueFalse:
 			c_cerialized_data	=	Rcerialize_packRubyTrueFalse(			rb_object );
 			break;
+
+		case CerializeType_Array:
+			c_cerialized_data	=	Rcerialize_packRubyArray(         rb_object );
+			break;
+
+		case CerializeType_Hash:
+			c_cerialized_data	=	Rcerialize_packRubyHash(          rb_object );
+			break;
+
+		case CerializeType_NamedStruct:
+			c_cerialized_data	=	Rcerialize_packRubyNamedStruct(		rb_object );
+			break;
+
+		case CerializeType_Struct:
+			c_cerialized_data	=	Rcerialize_packRubyStruct(        rb_object );
+			break;
 			
 		default:			
 			rb_raise( rb_eArgError, "Provided data was invalid." );
@@ -89,14 +105,14 @@ CerializedData* Rcerialize_packRubyInstance(	VALUE							rb_object,
 	if ( type_not_footer )	{
 		
 		CerializedData_setType(	c_cerialized_data,
-												c_storage_type );
+                            c_storage_type );
 	}
 	else {
 
 		CerializedData_internal_createDataFooter( c_cerialized_data );
 
 		CerializedData_setType(	c_cerialized_data,
-												c_storage_type );
+                            c_storage_type );
 	}
 	
 	return c_cerialized_data;
@@ -452,7 +468,7 @@ CerializedData* Rcerialize_packRubyHash(	VALUE		rb_hash )	{
 	//	free CerializedData*[]
 	free( c_cerialized_key_data_pointers );
 
-	CerializedData*			c_cerialized_data					=	CerializedData_new(	(void**) & c_data,
+	CerializedData*			c_cerialized_data					=	CerializedData_new(	& c_data,
 																																			c_data_size );
 
 	CerializedData_setType(	c_cerialized_data,
@@ -469,11 +485,13 @@ CerializedData* Rcerialize_packRubyHash(	VALUE		rb_hash )	{
 																													VALUE												rb_data,
 																													RcerializeHashForeachInfo*	c_passed_info )	{
 
-		c_passed_info->c_cerialized_data[ c_passed_info->count++ ]	=	Rcerialize_packRubyKeyDataPair(	rb_key,
-																																																	rb_data );
+		c_passed_info->c_cerialized_data[ c_passed_info->count ]	=	Rcerialize_packRubyKeyDataPair(	rb_key,
+                                                                                                rb_data );
 
-		c_passed_info->total_size	+=	c_passed_info->c_cerialized_data[ c_passed_info->count - 1 ]->size;
+		c_passed_info->total_size	+=	c_passed_info->c_cerialized_data[ c_passed_info->count ]->size;
 		
+    c_passed_info->count++;
+    
 		return ST_CONTINUE;
 	}
 
@@ -487,32 +505,33 @@ CerializedData* Rcerialize_packRubyStruct(	VALUE		rb_struct )	{
 	CerializedData*		c_cerialized_data					=	calloc( 1, sizeof( CerializedData ) );
 	void*							c_raw_data_copy_pointer		=	NULL;
 	
-	int								c_data_count							=	RSTRUCT_LEN( rb_struct ) / 2;
-	CerializedData*	c_cerialized_struct_data[ c_data_count ];
+	CerializedData**  c_cerialized_struct_data  = calloc( RSTRUCT_LEN( rb_struct ), sizeof( CerializedData* ) );
 
 	//	for each pair in struct
 	int				c_which_data		=	0;
 	uint32_t	c_total_size		=	0;
 	for ( c_which_data = 0 ; c_which_data < RSTRUCT_LEN( rb_struct ) ; c_which_data++ ) {
 
-		//	VALUE	rb_this_key		=	RSTRUCT_PTR( rb_struct )[ c_which_member ];
 		VALUE	rb_this_data	=	RSTRUCT_PTR( rb_struct )[ c_which_data ];
 
 		//	pack key/data pair
-		CerializeType			c_member_type							=	Rcerialize_storageTypeForRubyInstance( rb_this_data );
+		CerializeType			c_member_type               =	Rcerialize_storageTypeForRubyInstance( rb_this_data );
 		
-		c_cerialized_struct_data[ c_which_data ]		=	Rcerialize_packRubyInstance(	rb_this_data,
-																																								c_member_type,
-																																								TRUE );
+    CerializedData*   c_this_cerialized_struct    = Rcerialize_packRubyInstance(	rb_this_data,
+                                                                                  c_member_type,
+                                                                                  TRUE );
 		
-		c_total_size	+=	c_cerialized_struct_data[ c_which_data ]->size;
+		c_total_size	+=	c_this_cerialized_struct->size;
+
+    c_cerialized_struct_data[ c_which_data ]  = c_this_cerialized_struct;
 		
 	}
 	
 	//	allocate raw data
-	c_cerialized_data->data	=	malloc( c_total_size );
-	c_raw_data_copy_pointer	=	c_cerialized_data->data;
-	c_cerialized_data->size	=	c_total_size;
+  c_total_size            +=  ( RSTRUCT_LEN( rb_struct ) * sizeof( uint32_t ) );
+	c_cerialized_data->data	=   calloc( 1, c_total_size );
+	c_raw_data_copy_pointer	=   c_cerialized_data->data;
+	c_cerialized_data->size	=   c_total_size;
 	
 	//	copy data to destination
 	for ( c_which_data = 0 ; c_which_data < RSTRUCT_LEN( rb_struct ) ; c_which_data++ ) {
@@ -536,6 +555,8 @@ CerializedData* Rcerialize_packRubyStruct(	VALUE		rb_struct )	{
 	CerializedData_setType(	c_cerialized_data,
 													CerializeType_Struct );
 
+  free( c_cerialized_struct_data );
+
 	return c_cerialized_data;
 }
 
@@ -545,53 +566,53 @@ CerializedData* Rcerialize_packRubyStruct(	VALUE		rb_struct )	{
 
 //	<key length><key data><data length><data data>...<type/footer>
 CerializedData* Rcerialize_packRubyNamedStruct(	VALUE		rb_struct )	{
-
-	CerializedData*		c_cerialized_data					=	calloc( 1, sizeof( CerializedData ) );
-	void*							c_raw_data_copy_pointer		=	NULL;
 	
-	int								c_key_value_count					=	RSTRUCT_LEN( rb_struct ) / 2;
-	CerializedData*	c_cerialized_key_value_pair[ c_key_value_count ];
+	CerializedData**	c_cerialized_key_value_pair   = calloc( RSTRUCT_LEN( rb_struct ), sizeof( CerializedData* ) );
+
+	VALUE	rb_members  =  rb_struct_members( rb_struct );
 	
 	//	for each pair in struct
-	int				c_which_member	=	0;
 	int				c_which_data		=	0;
 	uint32_t	c_total_size		=	0;
-	for ( c_which_member = 0 ; c_which_member < RSTRUCT_LEN( rb_struct ) ; c_which_member += 2, c_which_data++ ) {
+	for ( c_which_data = 0 ; c_which_data < RSTRUCT_LEN( rb_struct ) ; c_which_data++ ) {
 
-		VALUE	rb_this_key		=	RSTRUCT_PTR( rb_struct )[ c_which_member ];
-		VALUE	rb_this_data	=	RSTRUCT_PTR( rb_struct )[ c_which_member + 1 ];
+		VALUE	rb_this_key		=	RARRAY_PTR( rb_members )[ c_which_data ];
+		VALUE	rb_this_data	=	RSTRUCT_PTR( rb_struct )[ c_which_data ];
 
-		//	pack key/data pair
-		c_cerialized_key_value_pair[ c_which_data ]	=	Rcerialize_packRubyKeyDataPair(	rb_this_key,
-																																									rb_this_data );
+    CerializedData*   c_this_cerialized_struct    = Rcerialize_packRubyKeyDataPair(	rb_this_key,
+                                                                                    rb_this_data );
+		
+		c_total_size	+=	c_this_cerialized_struct->size;
 
-		c_total_size	+=	c_cerialized_key_value_pair[ c_which_data ]->size;
+    c_cerialized_key_value_pair[ c_which_data ]  = c_this_cerialized_struct;
 
 	}
 
-	//	allocate raw data
-	c_cerialized_data->data	=	malloc( c_total_size );
-	c_raw_data_copy_pointer	=	c_cerialized_data->data;
-	c_cerialized_data->size	=	c_total_size;
+	//	allocate raw data - key/data pairs stack
+	void*           c_data                    =   calloc( 1, c_total_size );
+	void*           c_raw_data_copy_pointer   =   c_data;
 
 	//	copy data to destination
 	for ( c_which_data = 0 ; c_which_data < RSTRUCT_LEN( rb_struct ) ; c_which_data++ ) {
-
-		//	append pair size
-		memcpy(	c_raw_data_copy_pointer,
-						& c_cerialized_key_value_pair[ c_which_data ]->size,
-						sizeof( uint32_t ) );
-		c_raw_data_copy_pointer	+=	sizeof( uint32_t );
 	
+		CerializedData*	c_this_key_data_pair	=	c_cerialized_key_value_pair[ c_which_data ];
+
 		//	append pair to data
 		memcpy(	c_raw_data_copy_pointer,
-						c_cerialized_key_value_pair[ c_which_data ]->data,
-						c_cerialized_key_value_pair[ c_which_data ]->size );
-		c_raw_data_copy_pointer	+=	c_cerialized_key_value_pair[ c_which_data ]->size;
+						c_this_key_data_pair->data,
+						c_this_key_data_pair->size );
+            
+		c_raw_data_copy_pointer	+=	c_this_key_data_pair->size;
 
 		//	free packed key/data pair
-		CerializedData_free( & c_cerialized_key_value_pair[ c_which_data ] );
+		CerializedData_free( & c_this_key_data_pair );
+
 	}
+
+  free( c_cerialized_key_value_pair );
+  
+  CerializedData* c_cerialized_data = CerializedData_new( & c_data,
+                                                          c_total_size );
 
 	CerializedData_setType(	c_cerialized_data,
 													CerializeType_NamedStruct );
@@ -610,6 +631,8 @@ CerializedData* Rcerialize_packRubyNamedStruct(	VALUE		rb_struct )	{
 		CerializedData*		c_cerialized_data						=	calloc( 1, sizeof( CerializedData ) );
 		void*							c_raw_data_copy_pointer			=	NULL;
 
+    /*---------------------------- Pack Key/Data ----------------------------*/
+
 		//	pack key
 		CerializeType			c_key_type									=	Rcerialize_storageTypeForRubyInstance( rb_key );
 		CerializedData*		c_cerialized_key_from_pair	=	Rcerialize_packRubyInstance(	rb_key,
@@ -621,14 +644,32 @@ CerializedData* Rcerialize_packRubyNamedStruct(	VALUE		rb_struct )	{
 		CerializedData*		c_cerialized_data_from_pair	=	Rcerialize_packRubyInstance(	rb_data,
 																																									c_data_type,
 																																									TRUE );
+
+    /*----------------- Combine cerialized key/data elements ----------------*/
 		
-		c_cerialized_data->size	=	c_cerialized_key_from_pair->size 
-														+ c_cerialized_data_from_pair->size 
-														+ ( 2 * sizeof( uint32_t ) );
+    //  pack:
+    //  <total keysize/key/datasize/data size> <key data size><key data> <data data size><data data> <typefooter>
+    
+                                /* length of keysize/key/datasize/data/typefooter (this value) */
+    uint32_t    c_total_size  = sizeof( uint32_t )
+                                /* length of key/typefooter */
+                              + sizeof( uint32_t )
+                              + c_cerialized_key_from_pair->size
+                                /* length of data/typefooter */
+                              + sizeof( uint32_t )
+                              + c_cerialized_data_from_pair->size;
 		
 		//	alloc new combined data
-		c_cerialized_data->data	=	malloc( c_cerialized_data->size );
+		c_cerialized_data->data	=	calloc( 1, c_total_size );
+		c_cerialized_data->size	=	c_total_size;
 		c_raw_data_copy_pointer	=	c_cerialized_data->data;
+
+		//	append total key/data size
+    uint32_t  c_total_key_data_size = c_cerialized_data->size - sizeof( uint32_t );
+		memcpy(	c_raw_data_copy_pointer,
+						& c_total_key_data_size,
+						sizeof( uint32_t ) );
+		c_raw_data_copy_pointer	+=	sizeof( uint32_t );
 		
 		//	append key size
 		memcpy(	c_raw_data_copy_pointer,

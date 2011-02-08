@@ -24,5 +24,6 @@
 																							VALUE							rb_struct_class );
 	VALUE Rcerialize_unpackRubyNamedStruct(	CerializedData*		c_cerialized_named_struct,
 																										VALUE							rb_struct_class	);
-
+	RcerializeKeyDataReturn* Rcerialize_unpackRubyKeyDataPair(	CerializedData*		c_cerialized_key_data_pair );
+  
 #endif

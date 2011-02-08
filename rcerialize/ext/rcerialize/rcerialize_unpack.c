@@ -34,6 +34,9 @@ VALUE Rcerialize_unpackRubyInstance(	CerializedData*			c_cerialized_data,
 	switch ( *c_cerialized_data->type )	{
 
 		case CerializeType_FileContents:
+			rb_return	=	Rcerialize_unpackRubyFileContents(		c_cerialized_data );
+			break;
+
 		case CerializeType_FilePath:
 			rb_return	=	Rcerialize_unpackRubyFilePath(				c_cerialized_data );
 			break;
@@ -84,7 +87,7 @@ VALUE Rcerialize_unpackRubyInstance(	CerializedData*			c_cerialized_data,
 			break;
 
 		case CerializeType_Struct:
-			rb_return	=	Rcerialize_unpackRubyNamedStruct(			c_cerialized_data,
+			rb_return	=	Rcerialize_unpackRubyStruct(          c_cerialized_data,
 																												rb_load_as_class );
 			break;
 
@@ -108,9 +111,9 @@ VALUE Rcerialize_unpackRubyInstance(	CerializedData*			c_cerialized_data,
 ********************************************************************************************************************************************************************************************
 *******************************************************************************************************************************************************************************************/
 
-/********************************
+/***********************
 *  unpackRubyFilePath  *
-********************************/
+***********************/
 
 VALUE Rcerialize_unpackRubyFilePath(	CerializedData*		c_cerialized_file_path )	{
 
@@ -126,9 +129,9 @@ VALUE Rcerialize_unpackRubyFilePath(	CerializedData*		c_cerialized_file_path )	{
 	return rb_file;
 }
 
-/************************************
+/***************************
 *  unpackRubyFileContents  *
-************************************/
+***************************/
 
 VALUE Rcerialize_unpackRubyFileContents(	CerializedData*		c_cerialized_file_contents )	{
 
@@ -138,9 +141,9 @@ VALUE Rcerialize_unpackRubyFileContents(	CerializedData*		c_cerialized_file_cont
 	return rb_file_contents;
 }
 
-/******************************
+/*********************
 *  unpackRubySymbol  *
-******************************/
+*********************/
 
 VALUE Rcerialize_unpackRubySymbol(	CerializedData*		c_cerialized_symbol )	{
 
@@ -154,9 +157,9 @@ VALUE Rcerialize_unpackRubySymbol(	CerializedData*		c_cerialized_symbol )	{
 	return rb_symbol;
 }
 
-/******************************
+/*********************
 *  unpackRubyRegexp  *
-******************************/
+*********************/
 
 VALUE Rcerialize_unpackRubyRegexp(	CerializedData*		c_cerialized_regexp )	{
 
@@ -174,9 +177,9 @@ VALUE Rcerialize_unpackRubyRegexp(	CerializedData*		c_cerialized_regexp )	{
 	return rb_regexp;
 }
 
-/*************************************
+/************************
 *  unpackRubyClassName  *
-*************************************/
+************************/
 
 VALUE Rcerialize_unpackRubyClassName(	CerializedData*		c_cerialized_class_name )	{
 
@@ -190,9 +193,9 @@ VALUE Rcerialize_unpackRubyClassName(	CerializedData*		c_cerialized_class_name )
 	return rb_class;
 }
 
-/******************************
+/*********************
 *  unpackRubyString  *
-******************************/
+*********************/
 
 VALUE Rcerialize_unpackRubyString(	CerializedData*		c_cerialized_string )	{
 
@@ -202,9 +205,9 @@ VALUE Rcerialize_unpackRubyString(	CerializedData*		c_cerialized_string )	{
 	return rb_string;
 }
 
-/*******************************
+/**********************
 *  unpackRubyComplex  *
-*******************************/
+**********************/
 
 VALUE Rcerialize_unpackRubyComplex(	CerializedData*		c_cerialized_complex )	{
 
@@ -216,9 +219,9 @@ VALUE Rcerialize_unpackRubyComplex(	CerializedData*		c_cerialized_complex )	{
 	return rb_complex_number;
 }
 
-/********************************
+/***********************
 *  unpackRubyRational  *
-********************************/
+***********************/
 
 VALUE Rcerialize_unpackRubyRational(	CerializedData*		c_cerialized_rational )	{
 
@@ -230,9 +233,9 @@ VALUE Rcerialize_unpackRubyRational(	CerializedData*		c_cerialized_rational )	{
 	return rb_rational_number;
 }
 
-/*******************************
+/**********************
 *  unpackRubyInteger  *
-*******************************/
+**********************/
 
 VALUE Rcerialize_unpackRubyInteger(	CerializedData*		c_cerialized_integer )	{
 
@@ -243,9 +246,9 @@ VALUE Rcerialize_unpackRubyInteger(	CerializedData*		c_cerialized_integer )	{
 	return rb_integer;
 }
 
-/*****************************
+/********************
 *  unpackRubyFloat  *
-*****************************/
+********************/
 
 VALUE Rcerialize_unpackRubyFloat(	CerializedData*		c_cerialized_float )	{
 
@@ -256,9 +259,9 @@ VALUE Rcerialize_unpackRubyFloat(	CerializedData*		c_cerialized_float )	{
 	return rb_float;
 }
 
-/*********************************
+/************************
 *  unpackRubyTrueFalse  *
-*********************************/
+************************/
 
 VALUE Rcerialize_unpackRubyTrueFalse(	CerializedData*		c_cerialized_true_false )	{
 
@@ -270,88 +273,9 @@ VALUE Rcerialize_unpackRubyTrueFalse(	CerializedData*		c_cerialized_true_false )
 	return rb_true_false;
 }
 
-/****************************
-*  unpackRubyHash  *
-****************************/
-
-VALUE Rcerialize_unpackRubyHash(	CerializedData*		c_cerialized_hash )	{
-
-	VALUE	rb_return_hash	=	rb_hash_new();
-	
-	//	<key size><key data><data size><data data>...<type/footer>
-
-	void*				c_raw_data_iterator	=	c_cerialized_hash->data;
-
-	int					c_footer_size	=	0;
-	if ( CerializedData_internal_hasDataFooter( c_cerialized_hash ) )	{
-		c_footer_size	=	sizeof( CerializedData_DataFooterTypeForVersion( CerializedDataFooterCurrentVersion ) );
-	}
-	else if ( CerializedData_internal_hasTypeFooter( c_cerialized_hash ) )	{
-		c_footer_size	=	sizeof( CerializedTypeFooter );
-	}
-
-	//	while we have data remaining, unpack key data pair
-	uintptr_t*	c_end_of_iteration	=	c_raw_data_iterator 
-																	+ c_cerialized_hash->size;
-	
-	while ( c_raw_data_iterator != c_end_of_iteration )	{
-	
-		//	key
-		uint32_t	c_key_size				=		*(uint32_t*) c_raw_data_iterator;
-		c_raw_data_iterator					+=	sizeof( uint32_t );
-
-		void*			c_key_data				=		c_raw_data_iterator;
-		c_raw_data_iterator					+=	c_key_size - sizeof( CerializedTypeFooter );
-	
-		CerializedTypeFooter*				c_key_type_footer	=	(CerializedTypeFooter*) c_raw_data_iterator;
-		CerializeType								c_key_type				=	c_key_type_footer->type;
-		c_raw_data_iterator														+=	sizeof( CerializedTypeFooter );
-
-		//	data
-		uint32_t	c_data_size				=		*(uint32_t*) c_raw_data_iterator;
-		c_raw_data_iterator					+=	sizeof( uint32_t );
-
-		void*			c_data_data				=		c_raw_data_iterator;
-		c_raw_data_iterator					+=	c_data_size - sizeof( CerializedTypeFooter );
-	
-		CerializedTypeFooter*				c_data_type_footer	=	(CerializedTypeFooter*) c_raw_data_iterator;
-		CerializeType								c_data_type					=	c_data_type_footer->type;
-		c_raw_data_iterator															+=	sizeof( CerializedTypeFooter );
-
-		//	Finally, we have a type footer for key/value pair
-		c_raw_data_iterator															+=	sizeof( CerializedTypeFooter );
-	
-		//	unpack key/data
-		CerializedData*	c_cerialized_key	=	CerializedData_new(	& c_key_data,
-																														c_key_size );
-		CerializedData*	c_cerialized_data	=	CerializedData_new(	& c_data_data,
-																														c_data_size );
-		CerializedData_setType(	c_cerialized_key,
-														c_key_type);
-		CerializedData_setType(	c_cerialized_data,
-														c_data_type);
-		CerializedData_setDataNotToFree( c_cerialized_key );
-		CerializedData_setDataNotToFree( c_cerialized_data );
-		
-		VALUE	rb_key	=	Rcerialize_unpackRubyInstance(	c_cerialized_key,
-																										Qnil );
-		VALUE	rb_data	=	Rcerialize_unpackRubyInstance(	c_cerialized_data,
-																										Qnil );
-		
-		CerializedData_free( & c_cerialized_key );
-		CerializedData_free( & c_cerialized_data );
-		
-		rb_hash_aset(	rb_return_hash,
-									rb_key,
-									rb_data );
-	}
-	
-	return rb_return_hash;
-}
-
-/*****************************
+/********************
 *  unpackRubyArray  *
-*****************************/
+********************/
 
 VALUE Rcerialize_unpackRubyArray(	CerializedData*		c_cerialized_array )	{
 
@@ -404,12 +328,57 @@ VALUE Rcerialize_unpackRubyArray(	CerializedData*		c_cerialized_array )	{
 	return rb_return_array;
 }
 
-/******************************
+/*******************
+*  unpackRubyHash  *
+*******************/
+
+VALUE Rcerialize_unpackRubyHash(	CerializedData*		c_cerialized_hash )	{
+  
+	VALUE	rb_return_hash	=	rb_hash_new();
+	
+	//	<key size><key data><data size><data data>...<type/footer>
+  
+	uint32_t		c_footer_size     =	0;
+	if ( CerializedData_internal_hasDataFooter( c_cerialized_hash ) )	{
+		c_footer_size     =	sizeof( CerializedData_DataFooterTypeForVersion( CerializedDataFooterCurrentVersion ) );
+	}
+	else if ( CerializedData_internal_hasTypeFooter( c_cerialized_hash ) )	{
+		c_footer_size	=	sizeof( CerializedTypeFooter );
+	}
+
+  void*     c_original_data = c_cerialized_hash->data;
+  uint32_t  c_original_size = c_cerialized_hash->size;
+  
+	while ( c_cerialized_hash->size > c_footer_size )	{
+    
+    RcerializeKeyDataReturn*  c_key_data = Rcerialize_unpackRubyKeyDataPair(	c_cerialized_hash );
+
+    //  move data forward and subtract processed size
+    c_cerialized_hash->data +=  c_key_data->c_total_iterated_size;
+    c_cerialized_hash->size -=  c_key_data->c_total_iterated_size;
+
+    VALUE   rb_key      =   c_key_data->rb_key;
+    VALUE   rb_data     =   c_key_data->rb_data;
+		
+    free( c_key_data );
+    
+		rb_hash_aset(	rb_return_hash,
+                  rb_key,
+                  rb_data );
+	}
+
+  c_cerialized_hash->data =  c_original_data;
+  c_cerialized_hash->size =  c_original_size;
+	
+	return rb_return_hash;
+}
+
+/*********************
 *  unpackRubyStruct  *
-******************************/
+*********************/
 
 VALUE Rcerialize_unpackRubyStruct(	CerializedData*		c_cerialized_struct,
-																						VALUE							rb_struct_class )	{
+                                    VALUE							rb_struct_class )	{
 
 	VALUE	rb_return_struct	=	rb_funcall(	rb_struct_class,
 																				rb_intern( "new" ),
@@ -428,6 +397,9 @@ VALUE Rcerialize_unpackRubyStruct(	CerializedData*		c_cerialized_struct,
 	}
 	
 	VALUE	rb_members	=	rb_struct_members( rb_return_struct );
+
+  uintptr_t*	c_end_of_iteration	=	c_raw_data_iterator 
+                                  + c_cerialized_struct->size;
 	
 	//	we assume that we have a full set of struct data represented
 	//	by iterating the struct members (checking our data string internally), we ensure that we fail quietly and neatly if not
@@ -436,26 +408,34 @@ VALUE Rcerialize_unpackRubyStruct(	CerializedData*		c_cerialized_struct,
 	
 		VALUE	rb_this_member	=	RARRAY_PTR( rb_members )[ c_which_member ];
 	
-		uintptr_t*	c_end_of_iteration	=	c_raw_data_iterator 
-																		+ c_cerialized_struct->size 
-																		- c_footer_size;
-
-		while ( c_raw_data_iterator != c_end_of_iteration )	{
+		if ( c_raw_data_iterator != c_end_of_iteration )	{
 		
-			CerializedData	c_cerialized_member;
-			
-				c_cerialized_member.size		=		*(uint32_t*) c_raw_data_iterator;
-				c_raw_data_iterator					+=	sizeof( uint32_t );
-				
-				c_cerialized_member.data		=		c_raw_data_iterator;
-				c_raw_data_iterator					+=	c_cerialized_member.size - sizeof( CerializedTypeFooter );
+      uint32_t	c_data_size				=		*(uint32_t*) c_raw_data_iterator;
+      c_raw_data_iterator					+=	sizeof( uint32_t );
+      
+      void*			c_data_data				=		c_raw_data_iterator;
+      c_raw_data_iterator					+=	c_data_size - sizeof( CerializedTypeFooter );
+      
+      CerializedTypeFooter*				c_data_type_footer	=   (CerializedTypeFooter*) c_raw_data_iterator;
+      CerializeType								c_data_type					=   c_data_type_footer->type;
+      c_raw_data_iterator															+=	sizeof( CerializedTypeFooter );
 
-				c_cerialized_member.type		=		c_raw_data_iterator;
-				c_raw_data_iterator					+=	sizeof( CerializedTypeFooter );
+      //  we didn't pack non-named struct using key/value pairs, so we don't have an extra footer here
+      
+      //	unpack key/data
+      CerializedData*	c_cerialized_member	=	CerializedData_new(	& c_data_data,
+                                                                c_data_size );
 
-			VALUE	rb_data	=	Rcerialize_unpackRubyInstance(	& c_cerialized_member,
-																											Qnil );
-			
+      CerializedData_setDataNotToFree( c_cerialized_member );
+
+      CerializedData_setType(	c_cerialized_member,
+                              c_data_type);
+      
+      VALUE	rb_data	=	Rcerialize_unpackRubyInstance(	c_cerialized_member,
+                                                      rb_struct_class );
+      
+      CerializedData_free( & c_cerialized_member );
+
 			rb_struct_aset(	rb_return_struct,
 											rb_this_member,
 											rb_data );
@@ -466,12 +446,12 @@ VALUE Rcerialize_unpackRubyStruct(	CerializedData*		c_cerialized_struct,
 	return rb_return_struct;
 }
 
-/***********************************
+/**************************
 *  unpackRubyNamedStruct  *
-***********************************/
+**************************/
 
 VALUE Rcerialize_unpackRubyNamedStruct(	CerializedData*		c_cerialized_named_struct,
-																									VALUE							rb_struct_class	)	{
+                                        VALUE							rb_struct_class	)	{
 
 	VALUE	rb_return_struct	=	rb_funcall(	rb_struct_class,
 																				rb_intern( "new" ),
@@ -479,54 +459,92 @@ VALUE Rcerialize_unpackRubyNamedStruct(	CerializedData*		c_cerialized_named_stru
 	
 	//	<key size><key data><data size><data data>...<type/footer>
 
-	void*				c_raw_data_iterator	=	c_cerialized_named_struct->data;
-
-	int					c_footer_size	=	0;
+	uint32_t		c_footer_size	=	0;
 	if ( CerializedData_internal_hasDataFooter( c_cerialized_named_struct ) )	{
 		c_footer_size	=	sizeof( CerializedData_DataFooterTypeForVersion( CerializedDataFooterCurrentVersion ) );
 	}
 	else if ( CerializedData_internal_hasTypeFooter( c_cerialized_named_struct ) )	{
 		c_footer_size	=	sizeof( CerializedTypeFooter );
 	}
-	
-	uintptr_t*	c_end_of_iteration	=	c_raw_data_iterator 
-																	+ c_cerialized_named_struct->size 
-																	- c_footer_size;
-	
-	while ( c_raw_data_iterator != c_end_of_iteration )	{
-	
-		CerializedData	c_cerialized_key;
-		
-			c_cerialized_key.size		=		*(uint32_t*) c_raw_data_iterator;
-			c_raw_data_iterator			+=	sizeof( uint32_t );
-			
-			c_cerialized_key.data		=		c_raw_data_iterator;
-			c_raw_data_iterator			+=	c_cerialized_key.size - sizeof( CerializedTypeFooter );
+  
+  void*     c_original_data = c_cerialized_named_struct->data;
+  uint32_t  c_original_size = c_cerialized_named_struct->size;
 
-			c_cerialized_key.type		=		c_raw_data_iterator;
-			c_raw_data_iterator			+=	sizeof( CerializedTypeFooter );
+	while ( c_cerialized_named_struct->size > c_footer_size )	{
+    
+    RcerializeKeyDataReturn*  c_key_data = Rcerialize_unpackRubyKeyDataPair( c_cerialized_named_struct );
 
-		CerializedData	c_cerialized_data;
-	
-			c_cerialized_data.size	=		*(uint32_t*) c_raw_data_iterator;
-			c_raw_data_iterator			+=	sizeof( uint32_t );
-			
-			c_cerialized_data.data	=		c_raw_data_iterator;
-			c_raw_data_iterator			+=	c_cerialized_data.size - sizeof( CerializedTypeFooter );
+    //  move data forward and subtract processed size
+    c_cerialized_named_struct->data +=  c_key_data->c_total_iterated_size;
+    c_cerialized_named_struct->size -=  c_key_data->c_total_iterated_size;
 
-			c_cerialized_data.type	=		c_raw_data_iterator;
-			c_raw_data_iterator			+=	sizeof( CerializedTypeFooter );
+    VALUE   rb_key      =   c_key_data->rb_key;
+    VALUE   rb_data     =   c_key_data->rb_data;
 		
-	
-		VALUE	rb_key	=	Rcerialize_unpackRubyInstance(	& c_cerialized_key,
-																										Qnil );
-		VALUE	rb_data	=	Rcerialize_unpackRubyInstance(	& c_cerialized_data,
-																										Qnil );
-		
+    free( c_key_data );
+    
 		rb_struct_aset(	rb_return_struct,
 										rb_key,
 										rb_data );
 	}
-	
+
+  c_cerialized_named_struct->data =  c_original_data;
+  c_cerialized_named_struct->size =  c_original_size;
+		
 	return rb_return_struct;
 }
+
+	/**************************
+	*  unpackRubyKeyDataPair  *
+	**************************/
+
+	//	<key length><key data>
+	RcerializeKeyDataReturn* Rcerialize_unpackRubyKeyDataPair(	CerializedData*		c_cerialized_key_data_pair )	{
+    
+    void*		c_raw_data_iterator	=	c_cerialized_key_data_pair->data;
+
+    //  total size
+    //  uint32_t  c_total_size      =   *(uint32_t*) c_raw_data_iterator;
+		c_raw_data_iterator					+=	sizeof( uint32_t );
+
+		//	key
+		uint32_t	c_key_size				=		*(uint32_t*) c_raw_data_iterator;
+		c_raw_data_iterator					+=	sizeof( uint32_t );
+    
+		void*			c_key_data				=		c_raw_data_iterator;
+		c_raw_data_iterator					+=	c_key_size;
+    
+		//	data
+		uint32_t	c_data_size				=		*(uint32_t*) c_raw_data_iterator;
+		c_raw_data_iterator					+=	sizeof( uint32_t );
+    
+		void*			c_data_data				=		c_raw_data_iterator;
+		c_raw_data_iterator					+=	c_data_size;
+    
+		//	Finally, we have a type footer for key/value pair
+		c_raw_data_iterator					+=	sizeof( CerializedTypeFooter );
+    
+    CerializedData* c_cerialized_key   = CerializedData_new(  & c_key_data,
+                                                              c_key_size );
+    CerializedData* c_cerialized_data  = CerializedData_new(  & c_data_data,
+                                                              c_data_size );
+
+		CerializedData_setDataNotToFree( c_cerialized_key );
+		CerializedData_setDataNotToFree( c_cerialized_data );
+
+		VALUE	rb_key	=	Rcerialize_unpackRubyInstance(	c_cerialized_key,
+                                                    Qnil );
+		VALUE	rb_data	=	Rcerialize_unpackRubyInstance(	c_cerialized_data,
+                                                    Qnil );
+		
+		CerializedData_free( & c_cerialized_key );
+		CerializedData_free( & c_cerialized_data );
+    
+    RcerializeKeyDataReturn*  c_return  = calloc( 1, sizeof( RcerializeKeyDataReturn ) );
+    
+    c_return->rb_key   = rb_key;
+    c_return->rb_data  = rb_data;
+    c_return->c_total_iterated_size = c_raw_data_iterator - c_cerialized_key_data_pair->data;
+    
+    return c_return;
+  }
