@@ -1,0 +1,2 @@
+/Users/asher/Projects/rp/cerialize/rcerialize/ext/install/rcerialize/CMakeFiles/rcerialize.dir
+/Users/asher/Projects/rp/cerialize/rcerialize/ext/install/cspec/CMakeFiles/rcerialize_spec.dir

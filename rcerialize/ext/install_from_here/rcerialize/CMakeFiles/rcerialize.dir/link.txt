@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../librcerialize.dylib  CMakeFiles/rcerialize.dir/rcerialize_pack.c.o CMakeFiles/rcerialize.dir/rcerialize_type.c.o CMakeFiles/rcerialize.dir/rcerialize_unpack.c.o
+/usr/bin/ranlib ../librcerialize.dylib

@@ -99,6 +99,18 @@ DESCRIBE( Rcerialize_pack_unpack_Integer, "\n * Rcerialize_packRubyInteger( VALU
 
 	VALUE	rb_unpacked_integer	=	Rcerialize_unpackRubyInteger( cerialized_integer );
 	SHOULD_EQUAL( rb_unpacked_integer, rb_integer );
+
+  //  we also need to try a BigNum
+	VALUE	rb_big_integer	=	rb_cstr2inum( "100000000000000000000", 10 );
+	CerializedData*	cerialized_big_integer	=	Rcerialize_packRubyInteger( rb_big_integer );	
+	SHOULD_NOT_BE_NULL( cerialized_big_integer->data );
+	SHOULD_EQUAL( cerialized_big_integer->size, ( strlen( "100000000000000000000" ) + 1 ) * sizeof( char ) + sizeof( CerializedTypeFooter ) );
+	SHOULD_EQUAL( *cerialized_big_integer->type, CerializeType_BigInteger );
+	SHOULD_BE_FALSE( CerializedData_internal_hasDataFooter( cerialized_big_integer ) );
+	SHOULD_BE_TRUE( CerializedData_internal_hasTypeFooter( cerialized_big_integer ) );
+
+	VALUE	rb_unpacked_big_integer	=	Rcerialize_unpackRubyBigInteger( cerialized_big_integer );
+	SHOULD_EQUAL( rb_str_cmp( rb_big2str( rb_unpacked_big_integer, 10 ), rb_big2str( rb_big_integer, 10 ) ), 0 );
 	
   END_IT
 END_DESCRIBE
@@ -258,16 +270,29 @@ END_DESCRIBE
 DESCRIBE( Rcerialize_pack_unpack_TrueFalse, "\n * Rcerialize_packRubyTrueFalse( VALUE rb_true_false )\n * Rcerialize_unpackRubyTrueFalse( CerializedData* cerialized_data )" )
   IT( "can pack and unpack a true or false value" )
 
-	VALUE	rb_true_false	=	Qtrue;
-	CerializedData*	cerialized_true_false	=	Rcerialize_packRubyTrueFalse( rb_true_false );	
-	SHOULD_NOT_BE_NULL( cerialized_true_false->data );
-	SHOULD_EQUAL( cerialized_true_false->size, sizeof( CerializeStorage_TrueFalse ) + sizeof( CerializedTypeFooter ) );
-	SHOULD_EQUAL( *cerialized_true_false->type, CerializeType_TrueFalse );
-	SHOULD_BE_FALSE( CerializedData_internal_hasDataFooter( cerialized_true_false ) );
-	SHOULD_BE_TRUE( CerializedData_internal_hasTypeFooter( cerialized_true_false ) );
+  //  TRUE
+	VALUE	rb_true	=	Qtrue;
+	CerializedData*	cerialized_true	=	Rcerialize_packRubyTrueFalse( rb_true );	
+	SHOULD_NOT_BE_NULL( cerialized_true->data );
+	SHOULD_EQUAL( cerialized_true->size, sizeof( BOOL ) + sizeof( CerializedTypeFooter ) );
+	SHOULD_EQUAL( *cerialized_true->type, CerializeType_TrueFalse );
+	SHOULD_BE_FALSE( CerializedData_internal_hasDataFooter( cerialized_true ) );
+	SHOULD_BE_TRUE( CerializedData_internal_hasTypeFooter( cerialized_true ) );
 
-	VALUE	rb_unpacked_true_false	=	Rcerialize_unpackRubyTrueFalse( cerialized_true_false );
-	SHOULD_EQUAL( rb_unpacked_true_false, rb_true_false );
+	VALUE	rb_unpacked_true	=	Rcerialize_unpackRubyTrueFalse( cerialized_true );
+	SHOULD_EQUAL( rb_unpacked_true, rb_true );
+
+  //  FALSE
+	VALUE	rb_false	=	Qfalse;
+	CerializedData*	cerialized_false	=	Rcerialize_packRubyTrueFalse( rb_false );	
+	SHOULD_NOT_BE_NULL( cerialized_false->data );
+	SHOULD_EQUAL( cerialized_false->size, sizeof( BOOL ) + sizeof( CerializedTypeFooter ) );
+	SHOULD_EQUAL( *cerialized_false->type, CerializeType_TrueFalse );
+	SHOULD_BE_FALSE( CerializedData_internal_hasDataFooter( cerialized_false ) );
+	SHOULD_BE_TRUE( CerializedData_internal_hasTypeFooter( cerialized_false ) );
+
+	VALUE	rb_unpacked_false	=	Rcerialize_unpackRubyTrueFalse( cerialized_false );
+	SHOULD_EQUAL( rb_unpacked_false, rb_false );
 	
   END_IT
 END_DESCRIBE

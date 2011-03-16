@@ -91,6 +91,10 @@ CerializeType Rcerialize_storageTypeForRubyInstance(	VALUE		rb_object )	{
 		case T_STRUCT:
 			c_type	=	CerializeType_Struct;
 			break;
+    
+    case T_NIL:
+      c_type  = CerializeType_Nil;
+      break;
 
 		case T_OBJECT:
 		case T_MODULE:

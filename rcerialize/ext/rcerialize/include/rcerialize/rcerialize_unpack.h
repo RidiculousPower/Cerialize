@@ -12,10 +12,12 @@
 	VALUE Rcerialize_unpackRubySymbol(	CerializedData*		c_cerialized_symbol );
 	VALUE Rcerialize_unpackRubyRegexp(	CerializedData*		c_cerialized_regexp );
 	VALUE Rcerialize_unpackRubyClassName(	CerializedData*		c_cerialized_class_name );
+  VALUE Rcerialize_unpackRubyNil(	CerializedData*		c_cerialized_string );
 	VALUE Rcerialize_unpackRubyString(	CerializedData*		c_cerialized_string );
 	VALUE Rcerialize_unpackRubyComplex(	CerializedData*		c_cerialized_complex );
 	VALUE Rcerialize_unpackRubyRational(	CerializedData*		c_cerialized_rational );
 	VALUE Rcerialize_unpackRubyInteger(	CerializedData*		c_cerialized_integer );
+  VALUE Rcerialize_unpackRubyBigInteger(	CerializedData*		c_cerialized_big_integer );
 	VALUE Rcerialize_unpackRubyFloat(	CerializedData*		c_cerialized_float );
 	VALUE Rcerialize_unpackRubyTrueFalse(	CerializedData*		c_cerialized_true_false );
 	VALUE Rcerialize_unpackRubyHash(	CerializedData*		c_cerialized_hash );

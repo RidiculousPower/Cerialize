@@ -14,6 +14,7 @@ CerializedData* Rcerialize_packRubyInstance(	VALUE							rb_object,
 	CerializedData* Rcerialize_packRubySymbol(	VALUE		rb_symbol );
 	CerializedData* Rcerialize_packRubyRegexp(	VALUE		rb_regexp );
 	CerializedData* Rcerialize_packRubyClassName(	VALUE		rb_class );
+  CerializedData* Rcerialize_packRubyNil(	VALUE		rb_nil );
 	CerializedData* Rcerialize_packRubyString(	VALUE		rb_string );
 	CerializedData* Rcerialize_packRubyComplex(	VALUE		rb_complex_number );
 	CerializedData* Rcerialize_packRubyRational(	VALUE		rb_rational_number );

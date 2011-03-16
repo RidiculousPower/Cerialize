@@ -57,6 +57,10 @@ CerializedData* Rcerialize_packRubyInstance(	VALUE							rb_object,
 			c_cerialized_data	=	Rcerialize_packRubyClassName(			rb_object );
 			break;
 
+		case CerializeType_Nil:
+			c_cerialized_data	=	Rcerialize_packRubyNil(				rb_object );
+			break;
+
 		case CerializeType_String:
 			c_cerialized_data	=	Rcerialize_packRubyString(				rb_object );
 			break;
@@ -101,18 +105,10 @@ CerializedData* Rcerialize_packRubyInstance(	VALUE							rb_object,
 			rb_raise( rb_eArgError, "Provided data was invalid." );
 			break;
 	}
-
-	if ( type_not_footer )	{
-		
-		CerializedData_setType(	c_cerialized_data,
-                            c_storage_type );
-	}
-	else {
-
+  
+  //  if we have a footer instead of just a type we need to move the type over to a data footer
+	if ( ! type_not_footer )	{
 		CerializedData_internal_createDataFooter( c_cerialized_data );
-
-		CerializedData_setType(	c_cerialized_data,
-                            c_storage_type );
 	}
 	
 	return c_cerialized_data;
@@ -127,6 +123,23 @@ CerializedData* Rcerialize_packRubyInstance(	VALUE							rb_object,
 static int Rcerialize_iterateRubyHashForCerializedData(	VALUE												rb_key,
 																												VALUE												rb_data,
 																												RcerializeHashForeachInfo*	c_passed_info );
+
+/****************
+*  packRubyNil  *
+****************/
+
+CerializedData* Rcerialize_packRubyNil(	VALUE		rb_nil __attribute__ ((unused)) )	{
+
+	char*	c_nil	=	calloc( 1, sizeof( char ) );
+	
+	CerializedData*	c_cerialized_data	=	CerializedData_new(	(void**) & c_nil,
+																													sizeof( char ) );
+	
+	CerializedData_setType(	c_cerialized_data,
+													CerializeType_Nil );
+
+	return c_cerialized_data;
+}
 
 /*******************
 *  packRubyString  *
@@ -187,14 +200,46 @@ CerializedData* Rcerialize_packRubyClassName(	VALUE		rb_class )	{
 
 CerializedData* Rcerialize_packRubyInteger(	VALUE		rb_integer )	{	
 
-	long*	c_long							=		calloc( 1, sizeof( long ) );
-	*c_long										=		NUM2LONG( rb_integer );
+  //  a ruby integer can be an fixnum or a bignum
 
-	CerializedData*	c_cerialized_data	=	CerializedData_new(	(void**) & c_long,
-																													sizeof( long ) );
+  VALUE rb_integer_klass  = rb_class_of( rb_integer );
 
-	CerializedData_setType(	c_cerialized_data,
-													CerializeType_Integer );
+  CerializedData*	c_cerialized_data = NULL;
+
+  //  if we have a fixnum we store as a long
+  if (      rb_integer_klass == rb_cFixnum )  {
+  
+    //  
+    long long*	c_long				=		calloc( 1, sizeof( long long ) );
+    *c_long										=		NUM2LL( rb_integer );
+
+    c_cerialized_data	=	CerializedData_new(	(void**) & c_long,
+                                            sizeof( long long ) );
+  
+    CerializedData_setType(	c_cerialized_data,
+                            CerializeType_Integer );
+
+  }
+  //  or if we have a bignum we store as a bytestring of chars
+  else if ( rb_integer_klass == rb_cBignum )  {
+  
+    //  get byte string (char*)
+    VALUE rb_base_ten_big_integer_string  = rb_big2str( rb_integer, 10 );
+    long  c_size_of_big_integer  = ( RSTRING_LEN( rb_base_ten_big_integer_string ) + 1 ) * sizeof( char );
+
+    char*  c_big_integer_string = calloc( 1, c_size_of_big_integer );
+
+    const char* c_base_ten_big_integer_string   = StringValuePtr( rb_base_ten_big_integer_string );
+      
+    strcpy( c_big_integer_string, c_base_ten_big_integer_string );
+
+    c_cerialized_data	=	CerializedData_new(	(void**) & c_big_integer_string,
+                                            c_size_of_big_integer );
+  
+    CerializedData_setType(	c_cerialized_data,
+                            CerializeType_BigInteger );
+
+  }
 
 	return c_cerialized_data;
 }

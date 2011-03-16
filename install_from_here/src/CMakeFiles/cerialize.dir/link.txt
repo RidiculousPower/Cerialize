@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../libcerialize.dylib  CMakeFiles/cerialize.dir/cerialize.c.o CMakeFiles/cerialize.dir/cerialize_internal.c.o
+/usr/bin/ranlib ../libcerialize.dylib
