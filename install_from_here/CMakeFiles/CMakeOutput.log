@@ -1,4 +1,4 @@
-The system is: Darwin - 10.6.0 - i386
+The system is: Darwin - 10.7.0 - i386
 Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
 Compiler: /usr/bin/clang 
 Build flags: -march=x86-64;-g;-fno-common;-fsigned-char;-pipe;-Wall;-Wextra;-fcatch-undefined-behavior

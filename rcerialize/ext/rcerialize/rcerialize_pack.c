@@ -311,21 +311,49 @@ CerializedData* Rcerialize_packRubyFileContents(	VALUE		rb_file )	{
 
 	CerializedData*	c_cerialized_data	=	NULL;
 
-	//	read lines into array
-	VALUE	rb_file_lines	=	rb_funcall(	rb_file,
-																		rb_intern( "readlines" ),
-																		0 );
+  VALUE rb_file_contents  = Qnil;
 
-	VALUE	rb_file_contents	=	rb_funcall(	rb_file_lines,
-																				rb_intern( "join" ),
-																				1,
-																				rb_str_new( "\n", 1 ) );
+  if ( rb_class_of( rb_file ) == rb_const_get( rb_cFile, rb_intern( "String" ) ) )  {
+    
+    rb_file_contents  = rb_file;
+    
+  }
+  else  {
 
-	//	store as string
-	c_cerialized_data	=	Rcerialize_packRubyString(	rb_file_contents );
+    //  save file seek position so we can rewind and get all of it and return the file seek pointer
+    
+    VALUE rb_current_position = rb_funcall( rb_file,
+                                            rb_intern( "pos" ),
+                                            0 );
+    
+    //  rewind the file
+    rb_funcall( rb_file,
+                rb_intern( "rewind" ),
+                0 );
 
-	CerializedData_setType(	c_cerialized_data,
-													CerializeType_FileContents );
+    //	read lines into array
+    VALUE	rb_file_lines	=	rb_funcall(	rb_file,
+                                      rb_intern( "readlines" ),
+                                      0 );
+
+    rb_file_contents	=	rb_funcall(	rb_file_lines,
+                                    rb_intern( "join" ),
+                                    1,
+                                    rb_str_new( "\n", 1 ) );
+
+    //  seek back to the original seek position 
+    rb_funcall( rb_file,
+                rb_intern( "pos=" ),
+                1,
+                rb_current_position );
+                
+  }
+  
+  //	store as string
+  c_cerialized_data	=	Rcerialize_packRubyString(	rb_file_contents );
+
+  CerializedData_setType(	c_cerialized_data,
+                          CerializeType_FileContents );
 
 	return c_cerialized_data;
 }
