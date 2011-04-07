@@ -221,7 +221,8 @@ CerializedData* Rcerialize_packRubyInteger(	VALUE		rb_integer )	{
 
   }
   //  or if we have a bignum we store as a bytestring of chars
-  else if ( rb_integer_klass == rb_cBignum )  {
+  //  We are getting #<Class:#<Bignum:0x0000010216cc38>> or similar, so if we have an Integer not Fixnum we assume it is Bignum
+  else  {
   
     //  get byte string (char*)
     VALUE rb_base_ten_big_integer_string  = rb_big2str( rb_integer, 10 );
