@@ -146,7 +146,7 @@ VALUE Rcerialize_unpackRubyFileContents(	CerializedData*		c_cerialized_file_cont
 	//	create ruby string from file data
 	VALUE	rb_file_contents_string	=	Rcerialize_unpackRubyString(	c_cerialized_file_contents );
 	
-  VALUE rb_file_string_class    = rb_const_get( rb_cFile, rb_intern( "String" ) );
+  VALUE rb_file_string_class    = rb_const_get( rb_cFile, rb_intern( "Contents" ) );
   
   VALUE rb_file_contents        = rb_funcall( rb_file_string_class,
                                               rb_intern( "new" ),
