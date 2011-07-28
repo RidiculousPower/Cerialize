@@ -39,8 +39,9 @@ CerializeType Rcerialize_storageTypeForRubyInstance(	VALUE		rb_object )	{
 	switch ( c_ruby_type )	{
 
 		case T_STRING:
-      //  we want any objects of type File::String (files stored as contents and retrieved from storage) to be treated as file contents
-      if ( rb_class_of( rb_object ) != rb_const_get( rb_cFile, rb_intern( "String" ) ) )  {
+      //  we want any objects of type File::Contents (files stored as contents and retrieved from storage) to be treated as file contents
+      if (    rb_class_of( rb_object ) != rb_const_get( rb_cFile, rb_intern( "Contents" ) )
+          &&  rb_class_of( rb_object ) != rb_const_get( rb_cFile, rb_intern( "Path" ) ) )  {
         c_type	=	CerializeType_String;
         break;
       }

@@ -236,9 +236,21 @@ VALUE Rcerialize_unpackRubyString(	CerializedData*		c_cerialized_string )	{
 VALUE Rcerialize_unpackRubyComplex(	CerializedData*		c_cerialized_complex )	{
 
 	CerializeStorage_Complex*	c_complex_number	=	(CerializeStorage_Complex*) c_cerialized_complex->data;
+    
+  VALUE rb_real_part = DBL2NUM( c_complex_number->real );
+  if ( ! c_complex_number->real_is_float ) {
+  
+    rb_real_part = rb_to_int( rb_real_part );
+  }
 
-	VALUE	rb_complex_number	=	rb_Complex(	DBL2NUM( c_complex_number->real ),
-																				DBL2NUM( c_complex_number->imaginary )	);
+  VALUE rb_imaginary_part = DBL2NUM( c_complex_number->imaginary );
+  if ( ! c_complex_number->imaginary_is_float ) {
+    
+    rb_imaginary_part = rb_to_int( rb_imaginary_part );
+  }
+  
+	VALUE	rb_complex_number	=	rb_Complex(	rb_real_part,
+																				rb_imaginary_part	);
 
 	return rb_complex_number;
 }

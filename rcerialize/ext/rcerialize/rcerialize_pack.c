@@ -314,7 +314,8 @@ CerializedData* Rcerialize_packRubyFileContents(	VALUE		rb_file )	{
 
   VALUE rb_file_contents  = Qnil;
 
-  if ( rb_class_of( rb_file ) == rb_const_get( rb_cFile, rb_intern( "String" ) ) )  {
+  if (    rb_class_of( rb_file ) == rb_const_get( rb_cFile, rb_intern( "Path" ) )
+      ||  rb_class_of( rb_file ) == rb_const_get( rb_cFile, rb_intern( "Contents" ) ) )  {
     
     rb_file_contents  = rb_file;
     
@@ -339,8 +340,7 @@ CerializedData* Rcerialize_packRubyFileContents(	VALUE		rb_file )	{
 
     rb_file_contents	=	rb_funcall(	rb_file_lines,
                                     rb_intern( "join" ),
-                                    1,
-                                    rb_str_new( "\n", 1 ) );
+                                    0 );
 
     //  seek back to the original seek position 
     rb_funcall( rb_file,
@@ -374,8 +374,16 @@ CerializedData* Rcerialize_packRubyComplex(	VALUE		rb_complex_number )	{
 																						0 );
 	
 	CerializeStorage_Complex*	c_complex_number	=	calloc( 1, sizeof( CerializeStorage_Complex ) );
-	c_complex_number->real				=	NUM2DBL( rb_real_part );
-	c_complex_number->imaginary		=	NUM2DBL( rb_imaginary_part );
+	c_complex_number->real                =	NUM2DBL( rb_real_part );
+	c_complex_number->real_is_float       =	rb_funcall(	rb_real_part,
+                                                      rb_intern( "is_a?" ),
+                                                      1,
+                                                      rb_cFloat );
+	c_complex_number->imaginary           =	NUM2DBL( rb_imaginary_part );
+	c_complex_number->imaginary_is_float	=	rb_funcall(	rb_imaginary_part,
+                                                      rb_intern( "is_a?" ),
+                                                      1,
+                                                      rb_cFloat );
 
 	CerializedData*	c_cerialized_data	=	CerializedData_new(	(void**) & c_complex_number,
 																													sizeof( CerializeStorage_Complex ) );

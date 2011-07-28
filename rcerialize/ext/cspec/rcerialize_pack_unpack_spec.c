@@ -195,7 +195,7 @@ DESCRIBE( Rcerialize_pack_unpack_FileContents, "\n * Rcerialize_packRubyFileCont
 	//	reset file so we can get contents again to compare
 	rb_file_contents	=	rb_eval_string( "File.open( '/etc/passwd' )" );
 	VALUE	rb_file_contents_string	=	rb_funcall( rb_file_contents, rb_intern( "readlines" ), 0 );
-	rb_file_contents_string	=	rb_funcall(	rb_file_contents_string, rb_intern( "join" ), 1, rb_str_new( "\n", 1 ) );
+	rb_file_contents_string	=	rb_funcall(	rb_file_contents_string, rb_intern( "join" ), 0 );
 	uint32_t		c_string_length	=	RSTRING_LEN( rb_file_contents_string ) + 1 + sizeof( CerializedTypeFooter );
 	SHOULD_EQUAL( cerialized_file_contents->size, c_string_length );
 	SHOULD_EQUAL( *cerialized_file_contents->type, CerializeType_FileContents );
@@ -522,7 +522,7 @@ DESCRIBE( Rcerialize_pack_unpack_Instance, "\n * Rcerialize_packRubyInstance( VA
     VALUE rb_regexp         = rb_eval_string( "/some ([A-Za-z]+)/" );
     VALUE rb_file_path      = rb_eval_string( "File.new( './' )" );
     VALUE rb_file_contents  = rb_eval_string( "File.open( '/etc/passwd' )" );
-      VALUE	rb_file_contents_string	=	rb_funcall( rb_funcall( rb_file_contents, rb_intern( "readlines" ), 0 ), rb_intern( "join" ), 1, rb_str_new2( "\n" ) );
+      VALUE	rb_file_contents_string	=	rb_funcall( rb_funcall( rb_file_contents, rb_intern( "readlines" ), 0 ), rb_intern( "join" ), 0 );
     VALUE rb_complex        = rb_complex_raw( DBL2NUM( 420.42 ), DBL2NUM( 42.420 ) );
       VALUE	rb_real            =	rb_funcall( rb_complex, rb_intern( "real" ), 0 );
       VALUE	rb_imaginary       =	rb_funcall( rb_complex, rb_intern( "imaginary" ), 0 );

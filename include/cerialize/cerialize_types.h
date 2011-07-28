@@ -140,7 +140,9 @@
 	struct CerializeStorage_Complex	{
 	
 		double	real;
+    BOOL    real_is_float;
 		double	imaginary;
+    BOOL    imaginary_is_float;
 	
 	};
 
