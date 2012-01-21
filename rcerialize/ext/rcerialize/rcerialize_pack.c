@@ -526,11 +526,11 @@ CerializedData* Rcerialize_packRubyHash(  VALUE    rb_hash )  {
 
   //  <key_data_pair>...
 
-  void*        c_data                    =  calloc( 1, c_hash_passed_info.total_size );
-  uint32_t    c_data_size                =  c_hash_passed_info.total_size;
+  void*        c_data                     =  calloc( 1, c_hash_passed_info.total_size );
+  uint32_t     c_data_size                =  c_hash_passed_info.total_size;
   void*        c_raw_data_copy_pointer    = c_data;
 
-  int  c_which_key_data_pair    = 0;
+  int  c_which_key_data_pair  = 0;
   for ( c_which_key_data_pair = 0 ; c_which_key_data_pair < c_hash_passed_info.count ; c_which_key_data_pair++ )  {
     
     CerializedData*  c_this_key_data_pair  =  c_cerialized_key_data_pointers[ c_which_key_data_pair ];
