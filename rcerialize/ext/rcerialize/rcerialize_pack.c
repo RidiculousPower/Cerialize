@@ -378,7 +378,7 @@ CerializedData* Rcerialize_packRubyComplex(  VALUE    rb_complex_number )  {
   c_complex_number->real_is_float       =  rb_funcall(  rb_real_part,
                                                         rb_intern( "is_a?" ),
                                                         1,
-                                                      rb_cFloat );
+                                                        rb_cFloat );
   c_complex_number->imaginary           =  NUM2DBL( rb_imaginary_part );
   c_complex_number->imaginary_is_float  =  rb_funcall(  rb_imaginary_part,
                                                         rb_intern( "is_a?" ),
@@ -389,7 +389,7 @@ CerializedData* Rcerialize_packRubyComplex(  VALUE    rb_complex_number )  {
                                                               sizeof( CerializeStorage_Complex ) );
 
   CerializedData_setType(  c_cerialized_data,
-                          CerializeType_Complex );
+                           CerializeType_Complex );
 
   return c_cerialized_data;
 }
@@ -451,7 +451,7 @@ CerializedData* Rcerialize_packRubyArray(  VALUE    rb_array )  {
   void*              c_raw_data_copy_pointer    =  NULL;
   
   //  allocate an array of CerializedData structs
-  CerializedData**  c_cerialized_member_data  =  calloc( RARRAY_LEN( rb_array ), sizeof( CerializedData* ) );
+  CerializedData**  c_cerialized_member_data    =  calloc( RARRAY_LEN( rb_array ), sizeof( CerializedData* ) );
   
   //  for each item in array
   int  c_which_member      = 0;
@@ -461,7 +461,7 @@ CerializedData* Rcerialize_packRubyArray(  VALUE    rb_array )  {
     VALUE  rb_this_member  =  RARRAY_PTR( rb_array )[ c_which_member ];
 
     //  pack item
-    CerializeType      c_member_type              =  Rcerialize_storageTypeForRubyInstance( rb_this_member );
+    CerializeType  c_member_type                =  Rcerialize_storageTypeForRubyInstance( rb_this_member );
     c_cerialized_member_data[ c_which_member ]  =  Rcerialize_packRubyInstance(  rb_this_member,
                                                                                  c_member_type,
                                                                                  TRUE );
@@ -477,13 +477,13 @@ CerializedData* Rcerialize_packRubyArray(  VALUE    rb_array )  {
   for ( c_which_member = 0 ; c_which_member < RARRAY_LEN( rb_array ) ; c_which_member++ )  {
     
     //  append packed data length
-    memcpy(  c_raw_data_copy_pointer,
+    memcpy( c_raw_data_copy_pointer,
             & c_cerialized_member_data[ c_which_member ]->size,
             sizeof( uint32_t ) );
     c_raw_data_copy_pointer  +=  sizeof( uint32_t );
     
     //  append packed data
-    memcpy(  c_raw_data_copy_pointer,
+    memcpy( c_raw_data_copy_pointer,
             c_cerialized_member_data[ c_which_member ]->data,
             c_cerialized_member_data[ c_which_member ]->size );
     c_raw_data_copy_pointer  +=  c_cerialized_member_data[ c_which_member ]->size;
@@ -493,7 +493,7 @@ CerializedData* Rcerialize_packRubyArray(  VALUE    rb_array )  {
     
   }
 
-  CerializedData_setType(  c_cerialized_data,
+  CerializedData_setType( c_cerialized_data,
                           CerializeType_Array );
   
   free( c_cerialized_member_data );
@@ -526,19 +526,19 @@ CerializedData* Rcerialize_packRubyHash(  VALUE    rb_hash )  {
 
   //  <key_data_pair>...
 
-  void*        c_data                     =  calloc( 1, c_hash_passed_info.total_size );
-  uint32_t     c_data_size                =  c_hash_passed_info.total_size;
+  void*        c_data                     = calloc( 1, c_hash_passed_info.total_size );
+  uint32_t     c_data_size                = c_hash_passed_info.total_size;
   void*        c_raw_data_copy_pointer    = c_data;
 
-  int  c_which_key_data_pair  = 0;
+  int  c_which_key_data_pair    = 0;
   for ( c_which_key_data_pair = 0 ; c_which_key_data_pair < c_hash_passed_info.count ; c_which_key_data_pair++ )  {
     
     CerializedData*  c_this_key_data_pair  =  c_cerialized_key_data_pointers[ c_which_key_data_pair ];
     
     //  concat data with combined data (footer included if present)
-    memcpy(  c_raw_data_copy_pointer,
-             c_this_key_data_pair->data,
-             c_this_key_data_pair->size );
+    memcpy( c_raw_data_copy_pointer,
+            c_this_key_data_pair->data,
+            c_this_key_data_pair->size );
     
     //  move copy pointer forward
     c_raw_data_copy_pointer  +=  c_this_key_data_pair->size;
@@ -550,8 +550,8 @@ CerializedData* Rcerialize_packRubyHash(  VALUE    rb_hash )  {
   //  free CerializedData*[]
   free( c_cerialized_key_data_pointers );
 
-  CerializedData*      c_cerialized_data          =  CerializedData_new(  & c_data,
-                                                                          c_data_size );
+  CerializedData*  c_cerialized_data =  CerializedData_new(  & c_data,
+                                                             c_data_size );
 
   CerializedData_setType(  c_cerialized_data,
                            CerializeType_Hash );
