@@ -30,7 +30,7 @@
 
 CerializedData* Rcerialize_packRubyInstance(  VALUE              rb_object,
                                               CerializeType      c_storage_type,
-                                              BOOL              type_not_footer )  {
+                                              BOOL               type_not_footer )  {
 
   CerializedData*  c_cerialized_data  =  NULL;
 
@@ -54,11 +54,11 @@ CerializedData* Rcerialize_packRubyInstance(  VALUE              rb_object,
       break;
 
     case CerializeType_ClassName:
-      c_cerialized_data  =  Rcerialize_packRubyClassName(      rb_object );
+      c_cerialized_data  =  Rcerialize_packRubyClassName(     rb_object );
       break;
 
     case CerializeType_Nil:
-      c_cerialized_data  =  Rcerialize_packRubyNil(        rb_object );
+      c_cerialized_data  =  Rcerialize_packRubyNil(           rb_object );
       break;
 
     case CerializeType_String:
@@ -66,7 +66,7 @@ CerializedData* Rcerialize_packRubyInstance(  VALUE              rb_object,
       break;
 
     case CerializeType_Complex:
-      c_cerialized_data  =  Rcerialize_packRubyComplex(        rb_object );
+      c_cerialized_data  =  Rcerialize_packRubyComplex(       rb_object );
       break;
 
     case CerializeType_Rational:
@@ -74,15 +74,15 @@ CerializedData* Rcerialize_packRubyInstance(  VALUE              rb_object,
       break;
       
     case CerializeType_Integer:
-      c_cerialized_data  =  Rcerialize_packRubyInteger(        rb_object );
+      c_cerialized_data  =  Rcerialize_packRubyInteger(       rb_object );
       break;
       
     case CerializeType_Float:
-      c_cerialized_data  =  Rcerialize_packRubyFloat(          rb_object );
+      c_cerialized_data  =  Rcerialize_packRubyFloat(         rb_object );
       break;
       
     case CerializeType_TrueFalse:
-      c_cerialized_data  =  Rcerialize_packRubyTrueFalse(      rb_object );
+      c_cerialized_data  =  Rcerialize_packRubyTrueFalse(     rb_object );
       break;
 
     case CerializeType_Array:
@@ -94,7 +94,7 @@ CerializedData* Rcerialize_packRubyInstance(  VALUE              rb_object,
       break;
 
     case CerializeType_NamedStruct:
-      c_cerialized_data  =  Rcerialize_packRubyNamedStruct(    rb_object );
+      c_cerialized_data  =  Rcerialize_packRubyNamedStruct(   rb_object );
       break;
 
     case CerializeType_Struct:
@@ -122,7 +122,7 @@ CerializedData* Rcerialize_packRubyInstance(  VALUE              rb_object,
 
 static int Rcerialize_iterateRubyHashForCerializedData(  VALUE                        rb_key,
                                                          VALUE                        rb_data,
-                                                         RcerializeHashForeachInfo*  c_passed_info );
+                                                         RcerializeHashForeachInfo*   c_passed_info );
 
 /****************
 *  packRubyNil  *
@@ -133,10 +133,10 @@ CerializedData* Rcerialize_packRubyNil(  VALUE    rb_nil __attribute__ ((unused)
   char*  c_nil  =  calloc( 1, sizeof( char ) );
   
   CerializedData*  c_cerialized_data  =  CerializedData_new(  (void**) & c_nil,
-                                                          sizeof( char ) );
+                                                              sizeof( char ) );
   
   CerializedData_setType(  c_cerialized_data,
-                          CerializeType_Nil );
+                           CerializeType_Nil );
 
   return c_cerialized_data;
 }
@@ -184,7 +184,7 @@ CerializedData* Rcerialize_packRubyClassName(  VALUE    rb_class )  {
 
   CerializedData*  c_cerialized_data  =  NULL;
 
-  rb_class        =  rb_obj_as_string(  rb_class );
+  rb_class           =  rb_obj_as_string(  rb_class );
 
   c_cerialized_data  =  Rcerialize_packRubyString(  rb_class );
 
