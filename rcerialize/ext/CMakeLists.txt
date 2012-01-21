@@ -14,7 +14,7 @@ add_subdirectory( cspec )
 
 #  compiler-dependent flags:
 if( CMAKE_COMPILER_IS_GNUCC )
-	message( STATUS "WTF")
+  message( STATUS "WTF")
   #  gcc
   add_definitions(-ggdb -fsigned-char -freg-struct-return -Wall -W -Wshadow -Wstrict-prototypes -Wpointer-arith -Wcast-qual -Winline -Werror)
 else( CMAKE_COMPILER_IS_GNUCC )

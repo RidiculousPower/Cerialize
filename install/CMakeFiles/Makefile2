@@ -75,10 +75,10 @@ src/preinstall:
 
 # All Build rule for target.
 src/CMakeFiles/cerialize.dir/all:
-	$(MAKE) -f src/CMakeFiles/cerialize.dir/build.make src/CMakeFiles/cerialize.dir/depend
-	$(MAKE) -f src/CMakeFiles/cerialize.dir/build.make src/CMakeFiles/cerialize.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /Users/asher/Projects/rp/cerialize/install/CMakeFiles  1 2
-	@echo "Built target cerialize"
+  $(MAKE) -f src/CMakeFiles/cerialize.dir/build.make src/CMakeFiles/cerialize.dir/depend
+  $(MAKE) -f src/CMakeFiles/cerialize.dir/build.make src/CMakeFiles/cerialize.dir/build
+  $(CMAKE_COMMAND) -E cmake_progress_report /Users/asher/Projects/rp/cerialize/install/CMakeFiles  1 2
+  @echo "Built target cerialize"
 .PHONY : src/CMakeFiles/cerialize.dir/all
 
 # Include target in all.
@@ -87,9 +87,9 @@ all: src/CMakeFiles/cerialize.dir/all
 
 # Build rule for subdir invocation for target.
 src/CMakeFiles/cerialize.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/asher/Projects/rp/cerialize/install/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/cerialize.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/asher/Projects/rp/cerialize/install/CMakeFiles 0
+  $(CMAKE_COMMAND) -E cmake_progress_start /Users/asher/Projects/rp/cerialize/install/CMakeFiles 2
+  $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/cerialize.dir/all
+  $(CMAKE_COMMAND) -E cmake_progress_start /Users/asher/Projects/rp/cerialize/install/CMakeFiles 0
 .PHONY : src/CMakeFiles/cerialize.dir/rule
 
 # Convenience name for target.
@@ -98,7 +98,7 @@ cerialize: src/CMakeFiles/cerialize.dir/rule
 
 # clean rule for target.
 src/CMakeFiles/cerialize.dir/clean:
-	$(MAKE) -f src/CMakeFiles/cerialize.dir/build.make src/CMakeFiles/cerialize.dir/clean
+  $(MAKE) -f src/CMakeFiles/cerialize.dir/build.make src/CMakeFiles/cerialize.dir/clean
 .PHONY : src/CMakeFiles/cerialize.dir/clean
 
 # clean rule for target.
@@ -125,10 +125,10 @@ cspec/preinstall:
 
 # All Build rule for target.
 cspec/CMakeFiles/cerialize_spec.dir/all: src/CMakeFiles/cerialize.dir/all
-	$(MAKE) -f cspec/CMakeFiles/cerialize_spec.dir/build.make cspec/CMakeFiles/cerialize_spec.dir/depend
-	$(MAKE) -f cspec/CMakeFiles/cerialize_spec.dir/build.make cspec/CMakeFiles/cerialize_spec.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /Users/asher/Projects/rp/cerialize/install/CMakeFiles  3 4 5
-	@echo "Built target cerialize_spec"
+  $(MAKE) -f cspec/CMakeFiles/cerialize_spec.dir/build.make cspec/CMakeFiles/cerialize_spec.dir/depend
+  $(MAKE) -f cspec/CMakeFiles/cerialize_spec.dir/build.make cspec/CMakeFiles/cerialize_spec.dir/build
+  $(CMAKE_COMMAND) -E cmake_progress_report /Users/asher/Projects/rp/cerialize/install/CMakeFiles  3 4 5
+  @echo "Built target cerialize_spec"
 .PHONY : cspec/CMakeFiles/cerialize_spec.dir/all
 
 # Include target in all.
@@ -137,9 +137,9 @@ all: cspec/CMakeFiles/cerialize_spec.dir/all
 
 # Build rule for subdir invocation for target.
 cspec/CMakeFiles/cerialize_spec.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/asher/Projects/rp/cerialize/install/CMakeFiles 5
-	$(MAKE) -f CMakeFiles/Makefile2 cspec/CMakeFiles/cerialize_spec.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/asher/Projects/rp/cerialize/install/CMakeFiles 0
+  $(CMAKE_COMMAND) -E cmake_progress_start /Users/asher/Projects/rp/cerialize/install/CMakeFiles 5
+  $(MAKE) -f CMakeFiles/Makefile2 cspec/CMakeFiles/cerialize_spec.dir/all
+  $(CMAKE_COMMAND) -E cmake_progress_start /Users/asher/Projects/rp/cerialize/install/CMakeFiles 0
 .PHONY : cspec/CMakeFiles/cerialize_spec.dir/rule
 
 # Convenience name for target.
@@ -148,7 +148,7 @@ cerialize_spec: cspec/CMakeFiles/cerialize_spec.dir/rule
 
 # clean rule for target.
 cspec/CMakeFiles/cerialize_spec.dir/clean:
-	$(MAKE) -f cspec/CMakeFiles/cerialize_spec.dir/build.make cspec/CMakeFiles/cerialize_spec.dir/clean
+  $(MAKE) -f cspec/CMakeFiles/cerialize_spec.dir/build.make cspec/CMakeFiles/cerialize_spec.dir/clean
 .PHONY : cspec/CMakeFiles/cerialize_spec.dir/clean
 
 # clean rule for target.
@@ -162,6 +162,6 @@ clean: cspec/CMakeFiles/cerialize_spec.dir/clean
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+  $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

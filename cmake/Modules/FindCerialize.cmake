@@ -19,8 +19,8 @@
 
 #  Look for header in paths:
 FIND_PATH( CERIALIZE_INCLUDE_DIR  cerialize.h
-		                              /usr/local/include
-		                              /usr/include
+                                  /usr/local/include
+                                  /usr/include
 )
 
 

@@ -27,13 +27,13 @@ set( CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE )
 
 # Set the build version (VERSION) and the API version (SOVERSION)
 set_target_properties( cerialize  PROPERTIES  LINKER_LANGUAGE C 
-		                                          OUTPUT_NAME "../libcerialize"
-		                                          PREFIX ""
-		                                          SUFFIX ".dylib"
-		                                          LINK_FLAGS "-Wl,-rpath,-L${CMAKE_INSTALL_RPATH}"
-		                                          INSTALL_RPATH ${CMAKE_INSTALL_RPATH}
-		                                          INSTALL_NAME_DIR ${CMAKE_INSTALL_NAME_DIR}
-		                                          C_FLAGS "-ggdb -fsigned-char -Wall -W -Wshadow -Wstrict-prototypes -Wpointer-arith -Wcast-qual -Winline -Werror" )
+                                              OUTPUT_NAME "../libcerialize"
+                                              PREFIX ""
+                                              SUFFIX ".dylib"
+                                              LINK_FLAGS "-Wl,-rpath,-L${CMAKE_INSTALL_RPATH}"
+                                              INSTALL_RPATH ${CMAKE_INSTALL_RPATH}
+                                              INSTALL_NAME_DIR ${CMAKE_INSTALL_NAME_DIR}
+                                              C_FLAGS "-ggdb -fsigned-char -Wall -W -Wshadow -Wstrict-prototypes -Wpointer-arith -Wcast-qual -Winline -Werror" )
 
 # Installation of the library
 install( TARGETS cerialize DESTINATION lib PERMISSIONS OWNER_READ GROUP_READ WORLD_READ )

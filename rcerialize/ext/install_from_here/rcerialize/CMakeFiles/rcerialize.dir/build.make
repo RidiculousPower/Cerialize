@@ -51,23 +51,23 @@ include rcerialize/CMakeFiles/rcerialize.dir/flags.make
 
 rcerialize/CMakeFiles/rcerialize.dir/rcerialize_pack.c.o: rcerialize/CMakeFiles/rcerialize.dir/flags.make
 rcerialize/CMakeFiles/rcerialize.dir/rcerialize_pack.c.o: ../rcerialize/rcerialize_pack.c
-	$(CMAKE_COMMAND) -E cmake_progress_report /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/CMakeFiles $(CMAKE_PROGRESS_1)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object rcerialize/CMakeFiles/rcerialize.dir/rcerialize_pack.c.o"
-	cd /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/rcerialize && /usr/bin/clang  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/rcerialize.dir/rcerialize_pack.c.o   -c /Users/asher/Projects/rp/cerialize/rcerialize/ext/rcerialize/rcerialize_pack.c
+  $(CMAKE_COMMAND) -E cmake_progress_report /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/CMakeFiles $(CMAKE_PROGRESS_1)
+  @$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object rcerialize/CMakeFiles/rcerialize.dir/rcerialize_pack.c.o"
+  cd /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/rcerialize && /usr/bin/clang  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/rcerialize.dir/rcerialize_pack.c.o   -c /Users/asher/Projects/rp/cerialize/rcerialize/ext/rcerialize/rcerialize_pack.c
 
 rcerialize/CMakeFiles/rcerialize.dir/rcerialize_pack.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/rcerialize.dir/rcerialize_pack.c.i"
-	cd /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/rcerialize && /usr/bin/clang  $(C_DEFINES) $(C_FLAGS) -E /Users/asher/Projects/rp/cerialize/rcerialize/ext/rcerialize/rcerialize_pack.c > CMakeFiles/rcerialize.dir/rcerialize_pack.c.i
+  @$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/rcerialize.dir/rcerialize_pack.c.i"
+  cd /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/rcerialize && /usr/bin/clang  $(C_DEFINES) $(C_FLAGS) -E /Users/asher/Projects/rp/cerialize/rcerialize/ext/rcerialize/rcerialize_pack.c > CMakeFiles/rcerialize.dir/rcerialize_pack.c.i
 
 rcerialize/CMakeFiles/rcerialize.dir/rcerialize_pack.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/rcerialize.dir/rcerialize_pack.c.s"
-	cd /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/rcerialize && /usr/bin/clang  $(C_DEFINES) $(C_FLAGS) -S /Users/asher/Projects/rp/cerialize/rcerialize/ext/rcerialize/rcerialize_pack.c -o CMakeFiles/rcerialize.dir/rcerialize_pack.c.s
+  @$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/rcerialize.dir/rcerialize_pack.c.s"
+  cd /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/rcerialize && /usr/bin/clang  $(C_DEFINES) $(C_FLAGS) -S /Users/asher/Projects/rp/cerialize/rcerialize/ext/rcerialize/rcerialize_pack.c -o CMakeFiles/rcerialize.dir/rcerialize_pack.c.s
 
 rcerialize/CMakeFiles/rcerialize.dir/rcerialize_pack.c.o.requires:
 .PHONY : rcerialize/CMakeFiles/rcerialize.dir/rcerialize_pack.c.o.requires
 
 rcerialize/CMakeFiles/rcerialize.dir/rcerialize_pack.c.o.provides: rcerialize/CMakeFiles/rcerialize.dir/rcerialize_pack.c.o.requires
-	$(MAKE) -f rcerialize/CMakeFiles/rcerialize.dir/build.make rcerialize/CMakeFiles/rcerialize.dir/rcerialize_pack.c.o.provides.build
+  $(MAKE) -f rcerialize/CMakeFiles/rcerialize.dir/build.make rcerialize/CMakeFiles/rcerialize.dir/rcerialize_pack.c.o.provides.build
 .PHONY : rcerialize/CMakeFiles/rcerialize.dir/rcerialize_pack.c.o.provides
 
 rcerialize/CMakeFiles/rcerialize.dir/rcerialize_pack.c.o.provides.build: rcerialize/CMakeFiles/rcerialize.dir/rcerialize_pack.c.o
@@ -75,23 +75,23 @@ rcerialize/CMakeFiles/rcerialize.dir/rcerialize_pack.c.o.provides.build: rcerial
 
 rcerialize/CMakeFiles/rcerialize.dir/rcerialize_type.c.o: rcerialize/CMakeFiles/rcerialize.dir/flags.make
 rcerialize/CMakeFiles/rcerialize.dir/rcerialize_type.c.o: ../rcerialize/rcerialize_type.c
-	$(CMAKE_COMMAND) -E cmake_progress_report /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/CMakeFiles $(CMAKE_PROGRESS_2)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object rcerialize/CMakeFiles/rcerialize.dir/rcerialize_type.c.o"
-	cd /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/rcerialize && /usr/bin/clang  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/rcerialize.dir/rcerialize_type.c.o   -c /Users/asher/Projects/rp/cerialize/rcerialize/ext/rcerialize/rcerialize_type.c
+  $(CMAKE_COMMAND) -E cmake_progress_report /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/CMakeFiles $(CMAKE_PROGRESS_2)
+  @$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object rcerialize/CMakeFiles/rcerialize.dir/rcerialize_type.c.o"
+  cd /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/rcerialize && /usr/bin/clang  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/rcerialize.dir/rcerialize_type.c.o   -c /Users/asher/Projects/rp/cerialize/rcerialize/ext/rcerialize/rcerialize_type.c
 
 rcerialize/CMakeFiles/rcerialize.dir/rcerialize_type.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/rcerialize.dir/rcerialize_type.c.i"
-	cd /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/rcerialize && /usr/bin/clang  $(C_DEFINES) $(C_FLAGS) -E /Users/asher/Projects/rp/cerialize/rcerialize/ext/rcerialize/rcerialize_type.c > CMakeFiles/rcerialize.dir/rcerialize_type.c.i
+  @$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/rcerialize.dir/rcerialize_type.c.i"
+  cd /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/rcerialize && /usr/bin/clang  $(C_DEFINES) $(C_FLAGS) -E /Users/asher/Projects/rp/cerialize/rcerialize/ext/rcerialize/rcerialize_type.c > CMakeFiles/rcerialize.dir/rcerialize_type.c.i
 
 rcerialize/CMakeFiles/rcerialize.dir/rcerialize_type.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/rcerialize.dir/rcerialize_type.c.s"
-	cd /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/rcerialize && /usr/bin/clang  $(C_DEFINES) $(C_FLAGS) -S /Users/asher/Projects/rp/cerialize/rcerialize/ext/rcerialize/rcerialize_type.c -o CMakeFiles/rcerialize.dir/rcerialize_type.c.s
+  @$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/rcerialize.dir/rcerialize_type.c.s"
+  cd /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/rcerialize && /usr/bin/clang  $(C_DEFINES) $(C_FLAGS) -S /Users/asher/Projects/rp/cerialize/rcerialize/ext/rcerialize/rcerialize_type.c -o CMakeFiles/rcerialize.dir/rcerialize_type.c.s
 
 rcerialize/CMakeFiles/rcerialize.dir/rcerialize_type.c.o.requires:
 .PHONY : rcerialize/CMakeFiles/rcerialize.dir/rcerialize_type.c.o.requires
 
 rcerialize/CMakeFiles/rcerialize.dir/rcerialize_type.c.o.provides: rcerialize/CMakeFiles/rcerialize.dir/rcerialize_type.c.o.requires
-	$(MAKE) -f rcerialize/CMakeFiles/rcerialize.dir/build.make rcerialize/CMakeFiles/rcerialize.dir/rcerialize_type.c.o.provides.build
+  $(MAKE) -f rcerialize/CMakeFiles/rcerialize.dir/build.make rcerialize/CMakeFiles/rcerialize.dir/rcerialize_type.c.o.provides.build
 .PHONY : rcerialize/CMakeFiles/rcerialize.dir/rcerialize_type.c.o.provides
 
 rcerialize/CMakeFiles/rcerialize.dir/rcerialize_type.c.o.provides.build: rcerialize/CMakeFiles/rcerialize.dir/rcerialize_type.c.o
@@ -99,23 +99,23 @@ rcerialize/CMakeFiles/rcerialize.dir/rcerialize_type.c.o.provides.build: rcerial
 
 rcerialize/CMakeFiles/rcerialize.dir/rcerialize_unpack.c.o: rcerialize/CMakeFiles/rcerialize.dir/flags.make
 rcerialize/CMakeFiles/rcerialize.dir/rcerialize_unpack.c.o: ../rcerialize/rcerialize_unpack.c
-	$(CMAKE_COMMAND) -E cmake_progress_report /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/CMakeFiles $(CMAKE_PROGRESS_3)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object rcerialize/CMakeFiles/rcerialize.dir/rcerialize_unpack.c.o"
-	cd /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/rcerialize && /usr/bin/clang  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/rcerialize.dir/rcerialize_unpack.c.o   -c /Users/asher/Projects/rp/cerialize/rcerialize/ext/rcerialize/rcerialize_unpack.c
+  $(CMAKE_COMMAND) -E cmake_progress_report /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/CMakeFiles $(CMAKE_PROGRESS_3)
+  @$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object rcerialize/CMakeFiles/rcerialize.dir/rcerialize_unpack.c.o"
+  cd /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/rcerialize && /usr/bin/clang  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/rcerialize.dir/rcerialize_unpack.c.o   -c /Users/asher/Projects/rp/cerialize/rcerialize/ext/rcerialize/rcerialize_unpack.c
 
 rcerialize/CMakeFiles/rcerialize.dir/rcerialize_unpack.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/rcerialize.dir/rcerialize_unpack.c.i"
-	cd /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/rcerialize && /usr/bin/clang  $(C_DEFINES) $(C_FLAGS) -E /Users/asher/Projects/rp/cerialize/rcerialize/ext/rcerialize/rcerialize_unpack.c > CMakeFiles/rcerialize.dir/rcerialize_unpack.c.i
+  @$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/rcerialize.dir/rcerialize_unpack.c.i"
+  cd /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/rcerialize && /usr/bin/clang  $(C_DEFINES) $(C_FLAGS) -E /Users/asher/Projects/rp/cerialize/rcerialize/ext/rcerialize/rcerialize_unpack.c > CMakeFiles/rcerialize.dir/rcerialize_unpack.c.i
 
 rcerialize/CMakeFiles/rcerialize.dir/rcerialize_unpack.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/rcerialize.dir/rcerialize_unpack.c.s"
-	cd /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/rcerialize && /usr/bin/clang  $(C_DEFINES) $(C_FLAGS) -S /Users/asher/Projects/rp/cerialize/rcerialize/ext/rcerialize/rcerialize_unpack.c -o CMakeFiles/rcerialize.dir/rcerialize_unpack.c.s
+  @$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/rcerialize.dir/rcerialize_unpack.c.s"
+  cd /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/rcerialize && /usr/bin/clang  $(C_DEFINES) $(C_FLAGS) -S /Users/asher/Projects/rp/cerialize/rcerialize/ext/rcerialize/rcerialize_unpack.c -o CMakeFiles/rcerialize.dir/rcerialize_unpack.c.s
 
 rcerialize/CMakeFiles/rcerialize.dir/rcerialize_unpack.c.o.requires:
 .PHONY : rcerialize/CMakeFiles/rcerialize.dir/rcerialize_unpack.c.o.requires
 
 rcerialize/CMakeFiles/rcerialize.dir/rcerialize_unpack.c.o.provides: rcerialize/CMakeFiles/rcerialize.dir/rcerialize_unpack.c.o.requires
-	$(MAKE) -f rcerialize/CMakeFiles/rcerialize.dir/build.make rcerialize/CMakeFiles/rcerialize.dir/rcerialize_unpack.c.o.provides.build
+  $(MAKE) -f rcerialize/CMakeFiles/rcerialize.dir/build.make rcerialize/CMakeFiles/rcerialize.dir/rcerialize_unpack.c.o.provides.build
 .PHONY : rcerialize/CMakeFiles/rcerialize.dir/rcerialize_unpack.c.o.provides
 
 rcerialize/CMakeFiles/rcerialize.dir/rcerialize_unpack.c.o.provides.build: rcerialize/CMakeFiles/rcerialize.dir/rcerialize_unpack.c.o
@@ -135,9 +135,9 @@ rcerialize/../librcerialize.dylib: rcerialize/CMakeFiles/rcerialize.dir/rceriali
 rcerialize/../librcerialize.dylib: rcerialize/CMakeFiles/rcerialize.dir/rcerialize_unpack.c.o
 rcerialize/../librcerialize.dylib: rcerialize/CMakeFiles/rcerialize.dir/build.make
 rcerialize/../librcerialize.dylib: rcerialize/CMakeFiles/rcerialize.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking C static library ../librcerialize.dylib"
-	cd /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/rcerialize && $(CMAKE_COMMAND) -P CMakeFiles/rcerialize.dir/cmake_clean_target.cmake
-	cd /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/rcerialize && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/rcerialize.dir/link.txt --verbose=$(VERBOSE)
+  @$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking C static library ../librcerialize.dylib"
+  cd /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/rcerialize && $(CMAKE_COMMAND) -P CMakeFiles/rcerialize.dir/cmake_clean_target.cmake
+  cd /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/rcerialize && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/rcerialize.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 rcerialize/CMakeFiles/rcerialize.dir/build: rcerialize/../librcerialize.dylib
@@ -149,10 +149,10 @@ rcerialize/CMakeFiles/rcerialize.dir/requires: rcerialize/CMakeFiles/rcerialize.
 .PHONY : rcerialize/CMakeFiles/rcerialize.dir/requires
 
 rcerialize/CMakeFiles/rcerialize.dir/clean:
-	cd /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/rcerialize && $(CMAKE_COMMAND) -P CMakeFiles/rcerialize.dir/cmake_clean.cmake
+  cd /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/rcerialize && $(CMAKE_COMMAND) -P CMakeFiles/rcerialize.dir/cmake_clean.cmake
 .PHONY : rcerialize/CMakeFiles/rcerialize.dir/clean
 
 rcerialize/CMakeFiles/rcerialize.dir/depend:
-	cd /Users/asher/Projects/rp/cerialize/rcerialize/ext/install && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/asher/Projects/rp/cerialize/rcerialize/ext /Users/asher/Projects/rp/cerialize/rcerialize/ext/rcerialize /Users/asher/Projects/rp/cerialize/rcerialize/ext/install /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/rcerialize /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/rcerialize/CMakeFiles/rcerialize.dir/DependInfo.cmake --color=$(COLOR)
+  cd /Users/asher/Projects/rp/cerialize/rcerialize/ext/install && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/asher/Projects/rp/cerialize/rcerialize/ext /Users/asher/Projects/rp/cerialize/rcerialize/ext/rcerialize /Users/asher/Projects/rp/cerialize/rcerialize/ext/install /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/rcerialize /Users/asher/Projects/rp/cerialize/rcerialize/ext/install/rcerialize/CMakeFiles/rcerialize.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : rcerialize/CMakeFiles/rcerialize.dir/depend
 
