@@ -166,9 +166,9 @@ CerializedData* Rcerialize_packRubySymbol(  VALUE    rb_symbol )  {
 
   CerializedData*  c_cerialized_data  =  NULL;
 
-  rb_symbol  =  rb_obj_as_string(  rb_symbol );
+  VALUE rb_symbol_as_string =  rb_obj_as_string(  rb_symbol );
 
-  c_cerialized_data  =  Rcerialize_packRubyString(  rb_symbol );
+  c_cerialized_data  =  Rcerialize_packRubyString(  rb_symbol_as_string );
 
   CerializedData_setType(  c_cerialized_data,
                            CerializeType_Symbol );
